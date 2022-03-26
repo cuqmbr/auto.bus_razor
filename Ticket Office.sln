@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticket Office", "Ticket Office\Ticket Office.csproj", "{9ED20EB5-21A4-451A-8DED-C95DFD068D16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketOffice", "TicketOffice\TicketOffice.csproj", "{9ED20EB5-21A4-451A-8DED-C95DFD068D16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

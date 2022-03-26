@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using TicketOffice.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<TicketOfficeContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("TicketOfficeContext")));
 
 var app = builder.Build();
 
@@ -23,3 +30,4 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+
