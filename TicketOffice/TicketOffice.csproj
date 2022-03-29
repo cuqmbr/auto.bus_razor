@@ -7,12 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
       <Folder Include="Data" />
-      <Folder Include="Pages\Management\Cities" />
-      <Folder Include="Pages\Management\Routes" />
-      <Folder Include="Pages\Management\Tickets" />
-      <Folder Include="Pages\Management\Users" />
+      <Folder Include="Migrations" />
+      <Folder Include="Pages\Management" />
       <Folder Include="wwwroot\db" />
     </ItemGroup>
 
@@ -24,6 +21,7 @@
       </PackageReference>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.3" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Design" Version="1.1.6" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.3" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.3">
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
