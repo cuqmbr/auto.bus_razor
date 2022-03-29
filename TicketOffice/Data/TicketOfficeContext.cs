@@ -10,7 +10,7 @@ namespace TicketOffice.Data
 {
     public class TicketOfficeContext : DbContext
     {
-        public TicketOfficeContext (DbContextOptions<TicketOfficeContext> options)
+        public TicketOfficeContext(DbContextOptions<TicketOfficeContext> options)
             : base(options)
         {
         }
