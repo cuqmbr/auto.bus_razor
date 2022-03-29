@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using TicketOffice.Data;
+using TicketOffice.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,10 @@ builder.Services.AddDbContext<TicketOfficeContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("TicketOfficeContext")));
 
 var app = builder.Build();
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+SeedData.Initialize(services);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
