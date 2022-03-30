@@ -20,6 +20,64 @@ body {
     margin: 0 auto;
 }
 
+.search-block {
+    background: #eaeef1;
+    box-shadow: 0 1px 2.4rem 0 #c3c9d0;
+    padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0.5rem;
+}
+
+.station, .date, div.search-btn {
+    display: inline-block;
+    margin: 0 1.5rem;
+}
+
+.title {
+    font-weight: 500;
+    color: #777a7e;
+    margin-bottom: .3rem;
+}
+
+input[type=text], input[type=date] {
+    font-size: 1.5rem;
+    color: #262626;
+    font-weight: 500;
+    line-height: 4.7rem;
+    width: 15rem;
+    height: 3rem;
+    box-sizing: border-box;
+    background: #dfe3e5;
+    border: 1px solid #b8bfc7;
+    box-shadow: 0 1px 0 0 #fff;
+    border-radius: .3rem;
+    padding: 0 1.1rem;
+    text-align: left;
+}
+
+input[type=text]:focus, input[type=date]:focus {
+    outline: 0;
+    border-color: #68b2dd;
+    background-color: #fff;
+}
+
+input.search-btn {
+    color: #1d4965;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 3rem;
+    padding: 0 1.5rem;
+    display: inline-block;
+    background: linear-gradient(0deg,#79b6db,#b3dbf2);
+    border: none;
+    border-radius: .3rem;
+    cursor: pointer;
+}
+
+input.search-btn:hover {
+    opacity: 0.8;
+}
+
 .route-list {
     margin-top: 3rem;
 }
@@ -45,8 +103,22 @@ th {
     line-height: 1.6rem;
 }
 
+.link-btn-sort {
+    color: #777a7e;
+    text-decoration: none;
+}
+
+.link-btn-sort:hover {
+    color: #1d4965;
+    cursor: pointer;
+}
+
+.link-btn-sort:visited, .link-btn-sort:active {
+    text-decoration: none;
+}
+
 tr {
-    line-height: 6rem;
+    line-height: 5rem;
     background-color: white;
 }
 
@@ -66,6 +138,23 @@ td.num, td.capacity {
     line-height: 2rem;
 }
 
+.city-list-btn {
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 0.5rem;
+    color: #245c78;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.city-list-btn:visited {
+    text-decoration: none;
+}
+
+.city-list-btn:hover {
+    text-decoration: underline;
+}
+
 td.city {
     font-size: 1rem;
     font-weight: 700;
@@ -75,28 +164,40 @@ td.city {
 td.time, td.duration {
     font-size: 1.2rem;
     font-weight: 900;
-    line-height: 1.8rem;
+    line-height: 1.4rem;
 }
 
 .route-date  {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #c5c7cc;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 700;
     line-height: 1.25rem;
 }
 
-.search-block {
-    background: #eaeef1;
-    box-shadow: 0 1px 2.4rem 0 #c3c9d0;
-    padding: 1.5rem 2.5rem 3.5rem 2.5rem;
+.link-btn-choose {
+    line-height: 2.5rem;
+    padding: 0 1rem;
+    display: inline-block;
+    color: #1d4965;
+    font-weight: 500;
+    background: linear-gradient(0deg,#79b6db,#b3dbf2);
+    border: none;
+    border-radius: .3rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.link-btn-choose:hover {
+    opacity: 0.8;
 }
 
 .search-error {
     background: #f1f2f4;
     border: 1px solid #d7dce1;
     box-shadow: 0 0 4px 0 rgba(195,201,208,.5);
-    font-weight: 700;
+    font-weight: 500;
     font-size: 1.5rem;
     padding: 4rem 4rem;
     text-align: center;
