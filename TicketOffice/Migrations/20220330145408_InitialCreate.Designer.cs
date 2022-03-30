@@ -11,7 +11,7 @@ using TicketOffice.Data;
 namespace TicketOffice.Migrations
 {
     [DbContext(typeof(TicketOfficeContext))]
-    [Migration("20220329095305_InitialCreate")]
+    [Migration("20220330145408_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,9 +54,8 @@ namespace TicketOffice.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Number")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

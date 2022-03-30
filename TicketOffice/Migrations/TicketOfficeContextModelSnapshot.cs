@@ -52,9 +52,8 @@ namespace TicketOffice.Migrations
                     b.Property<int>("Capacity")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Number")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Number")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 

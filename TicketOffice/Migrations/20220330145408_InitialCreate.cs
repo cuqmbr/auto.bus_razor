@@ -15,7 +15,7 @@ namespace TicketOffice.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Number = table.Column<string>(type: "TEXT", nullable: false),
+                    Number = table.Column<int>(type: "INTEGER", nullable: false),
                     Capacity = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

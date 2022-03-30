@@ -41,7 +41,7 @@ public class SeedData
         context.Route.AddRange(new Route[]
         {
             new Route {
-                Number = "0001",
+                Number = 2,
                 Capacity = 30,
                 Cities = new City[]
                 {
@@ -62,11 +62,11 @@ public class SeedData
                         Name = "Сєвєродонецьк",
                         ArrivalTime = new DateTime(2022, 03, 28, 9, 55, 0)
                     }
-                },
+                }
             },
             new Route
             {
-                Number = "0002",
+                Number = 1,
                 Capacity = 25,
                 Cities = new City[]
                 {
@@ -86,6 +86,37 @@ public class SeedData
                     {
                         Name = "Кремінна",
                         ArrivalTime = new DateTime(2022, 03, 28, 17, 40, 0)
+                    }
+                }
+            },
+            new Route
+            {
+                Number = 3,
+                Capacity = 30,
+                Cities = new City[]
+                {
+                    new City
+                    {
+                        Name = "Кремінна",
+                        ArrivalTime = new DateTime(2022, 03, 28, 9, 20, 0),
+                        DepartureTime = new DateTime(2022, 03, 28, 8, 40, 0),
+                    },
+                    new City
+                    {
+                        Name = "Житлівка",
+                        ArrivalTime = new DateTime(2022, 03, 28, 10, 0, 0),
+                        DepartureTime = new DateTime(2022, 03, 28, 10, 15, 0),
+                    },
+                    new City
+                    {
+                        Name = "Рубіжне",
+                        ArrivalTime = new DateTime(2022, 03, 28, 11, 5, 0),
+                        DepartureTime = new DateTime(2022, 03, 28, 11, 20, 0),
+                    },
+                    new City
+                    {
+                        Name = "Сєвєродонецьк",
+                        ArrivalTime = new DateTime(2022, 03, 28, 11, 55, 0)
                     }
                 }
             }
