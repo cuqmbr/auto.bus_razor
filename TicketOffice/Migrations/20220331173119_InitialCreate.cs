@@ -29,11 +29,11 @@ namespace TicketOffice.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    FirstName = table.Column<string>(type: "TEXT", nullable: true),
-                    LastName = table.Column<string>(type: "TEXT", nullable: true),
-                    Patronymic = table.Column<string>(type: "TEXT", nullable: true),
-                    Email = table.Column<string>(type: "TEXT", nullable: false),
-                    Password = table.Column<string>(type: "TEXT", nullable: false),
+                    FirstName = table.Column<string>(type: "TEXT", maxLength: 24, nullable: true),
+                    LastName = table.Column<string>(type: "TEXT", maxLength: 24, nullable: true),
+                    Patronymic = table.Column<string>(type: "TEXT", maxLength: 24, nullable: true),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 48, nullable: false),
+                    Password = table.Column<string>(type: "TEXT", maxLength: 32, nullable: false),
                     IsManager = table.Column<bool>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -47,7 +47,7 @@ namespace TicketOffice.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 24, nullable: false),
                     ArrivalTime = table.Column<DateTime>(type: "TEXT", nullable: true),
                     DepartureTime = table.Column<DateTime>(type: "TEXT", nullable: true),
                     RouteId = table.Column<int>(type: "INTEGER", nullable: false)

@@ -11,7 +11,7 @@ using TicketOffice.Data;
 namespace TicketOffice.Migrations
 {
     [DbContext(typeof(TicketOfficeContext))]
-    [Migration("20220330145408_InitialCreate")]
+    [Migration("20220331173119_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,7 @@ namespace TicketOffice.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(24)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("RouteId")
@@ -91,22 +92,27 @@ namespace TicketOffice.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
+                        .HasMaxLength(48)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FirstName")
+                        .HasMaxLength(24)
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsManager")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("LastName")
+                        .HasMaxLength(24)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
                         .IsRequired()
+                        .HasMaxLength(32)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Patronymic")
+                        .HasMaxLength(24)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

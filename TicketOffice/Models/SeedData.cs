@@ -8,7 +8,8 @@ public class SeedData
     public static void Initialize(IServiceProvider serviceProvider)
     {
         using var context =
-            new TicketOfficeContext(serviceProvider.GetRequiredService<DbContextOptions<TicketOfficeContext>>());
+            new TicketOfficeContext(serviceProvider
+                .GetRequiredService<DbContextOptions<TicketOfficeContext>>());
 
         if (context == null)
         {
