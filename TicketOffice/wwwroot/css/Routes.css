@@ -2,6 +2,11 @@ html {
     font-size: 16px;
     min-height: 100%;
     font-family: 'Roboto', sans-serif;
+    background-color: #eaeef1;
+}
+
+body {
+    margin: 0;
 }
 
 /*@media (min-width: 768px) {
@@ -10,11 +15,6 @@ html {
     }
 }*/
 
-body {
-    background-color: #eaeef1;
-    margin-bottom: 60px;
-}
-
 .wrapper {
     width: 70rem;
     margin: 0 auto;
@@ -22,10 +22,10 @@ body {
 
 .search-block {
     background: #eaeef1;
+    border-radius: 0.5rem;
     box-shadow: 0 1px 2.4rem 0 #c3c9d0;
     padding: 1.5rem 1.5rem 1.5rem 1.5rem;
     margin: 1.5rem 0;
-    border-radius: 0.5rem;
 }
 
 .station, .date, div.search-btn {
