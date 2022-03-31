@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TicketOffice.Data;
 using TicketOffice.Models;
 
-namespace TicketOffice.Pages;
+namespace TicketOffice.Pages.Auth;
 
-public class IndexModel : PageModel
+public class RegistrationModel : PageModel
 {
     private readonly TicketOfficeContext _context;
     
-    public IndexModel(TicketOfficeContext context)
+    public RegistrationModel(TicketOfficeContext context)
     {
         _context = context;
     }
@@ -32,6 +32,6 @@ public class IndexModel : PageModel
         _context.User.Add(User);
         await _context.SaveChangesAsync();
         
-        return RedirectToPage("./Routes");
+        return RedirectToPage("./");
     }
 }

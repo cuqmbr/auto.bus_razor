@@ -14,6 +14,17 @@
 </head>
 <body>
 
+<div class="topnav">
+    @{
+        string path = @Model.Request.Path.ToString();
+    }
+    
+    <a class="@(path == "/" ? "active" : "")" href="/">Головна</a>
+    <a class="@(path.Contains("routes") ? "active" : "")" href="/routes">Пошук маршрутів</a>
+    <div class="topnav-right">
+        <a class="@(path.Contains("auth") ? "active" : "")" href="/auth/login">Авторизація</a>
+    </div>
+</div>
 
 @RenderBody()
 

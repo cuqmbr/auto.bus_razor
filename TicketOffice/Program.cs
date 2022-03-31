@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using TicketOffice.Data;
 using TicketOffice.Models;
 
@@ -25,12 +24,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRouting();
+app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseRouting();
 
 app.MapRazorPages();
 

@@ -30,4 +30,9 @@
       <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Auth\Registration\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\Login\Index.cshtml" />
+    </ItemGroup>
+
 </Project>
