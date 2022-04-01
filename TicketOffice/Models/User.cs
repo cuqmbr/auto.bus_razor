@@ -33,13 +33,13 @@ public class User
      ErrorMessage = "E-mail невалідний")]
     public string Email { get; set; }
     
-    [MaxLength(32, ErrorMessage = "Пароль не може бути більше 32 символів"),
-     MinLength(8, ErrorMessage = "Пороль не може бути менше 8 символів")]
+    [MaxLength(32, ErrorMessage = "Пароль має бути менше 32 символів"),
+     MinLength(8, ErrorMessage = "Пороль має бути більше 8 символів")]
     [Required(ErrorMessage = "Поле має бути заповненим")]
     [Display(Name = "Пароль")]
     [DataType(DataType.Password)]
     [RegularExpression(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
-     ErrorMessage = "Пароль має містити 1 маленьку та велику літери, 1 цифру, 1 спеціальний символ (#, $, @ та ін.), бути написаний латиницею та мати більше 8 символів")]
+     ErrorMessage = "Проль має містити великі та малі латинські літери, цифри та спеціальні знаки (@, $, % та ін.)")]
     public string Password { get; set; }
 
     
