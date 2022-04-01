@@ -14,12 +14,16 @@
             Реєстрація
         </div>
         
-        <input class="field" placeholder="E-mail" autocomplete="off" asp-for="User.Email"/>
-        <span asp-validation-for="User.Email" class="validation-error"></span>
+        <input class="field" type="text" placeholder="E-mail" autocomplete="off" asp-for="Email"/>
+        <div class="validation-error">
+            <span>@Model.emailValidation</span>
+        </div>
         <br>
 
-        <input class="field" placeholder="Пароль" autocomplete="off" asp-for="User.Password"/>
-        <span asp-validation-for="User.Password" class="validation-error"></span>
+        <input class="field" type="password" placeholder="Пароль" autocomplete="off" asp-for="Password"/>
+        <div class="validation-error">
+            <span>@Model.passwordValidation</span>
+        </div>
         <br>
 
         <input class="submit-btn" type="submit" value="Зареєструватись"/>
