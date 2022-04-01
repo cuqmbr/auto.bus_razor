@@ -12,7 +12,7 @@ body {
 
 .wrapper {
     width: 50rem;
-    margin: 1.5rem auto;
+    margin: 2.5rem auto;
     padding: 3rem 0;
     border-radius: 0.5rem;
     box-shadow: 0 1px 2.4rem 0 #c3c9d0;
@@ -38,7 +38,6 @@ input.field {
     box-shadow: 0 1px 0 0 #fff;
     border-radius: .3rem;
     padding: 0 1.1rem;
-    margin-bottom: 1rem;
     text-align: left;
 }
 
@@ -58,6 +57,16 @@ input.submit-btn {
     border: none;
     border-radius: .3rem;
     cursor: pointer;
+}
+
+.validation-error {
+    margin: 0.25rem 0 1rem 0;
+    color: #777a7e;
+    text-align: center;
+    width: 30rem;
+    display: inline-block;
+    justify-content: center;
+    line-height: 1rem;
 }
 
 .hint {
