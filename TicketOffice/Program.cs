@@ -5,10 +5,19 @@ using TicketOffice.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages()
+    .AddSessionStateTempDataProvider();;
 
 builder.Services.AddDbContext<TicketOfficeContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("TicketOfficeContext")));
+
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = ".AutoBus.Session";
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -29,6 +38,8 @@ app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.MapRazorPages();
 

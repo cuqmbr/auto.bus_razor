@@ -14,7 +14,7 @@ public class LoginModel : PageModel
     [BindProperty] public string Password { get; set; }
     public string emailValidation;
     public string passwordValidation;
-    
+
     private readonly TicketOfficeContext _context;
     
     public LoginModel(TicketOfficeContext context)
@@ -24,6 +24,11 @@ public class LoginModel : PageModel
 
     public IActionResult OnGet()
     {
+        if (HttpContext.Session.GetInt32("UserId") != null)
+        {
+            return RedirectToPage("/Account/Index");
+        }
+        
         return Page();
     }
 
@@ -38,7 +43,9 @@ public class LoginModel : PageModel
 
         if (ValidateEmail(Email, out emailValidation) && ValidatePassword(Password, out passwordValidation))
         {
-            return RedirectToPage("/Index");
+            HttpContext.Session.SetInt32("UserId", User.First().Id);
+
+            return RedirectToPage("Account/Index");
         }
 
         return Page();

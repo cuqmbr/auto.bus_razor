@@ -14,7 +14,7 @@ public class RegistrationModel : PageModel
     [BindProperty] public string Password { get; set; }
     public string emailValidation;
     public string passwordValidation;
-    
+
     private readonly TicketOfficeContext _context;
     
     public RegistrationModel(TicketOfficeContext context)
@@ -24,6 +24,11 @@ public class RegistrationModel : PageModel
 
     public IActionResult OnGet()
     {
+        if (HttpContext.Session.GetInt32("UserId") != null)
+        {
+            return RedirectToPage("/Account/Index");
+        }
+        
         emailValidation = String.Empty;
         passwordValidation = String.Empty;
         
@@ -45,7 +50,14 @@ public class RegistrationModel : PageModel
             });
             await _context.SaveChangesAsync();
             
-            return RedirectToPage("/Index");
+            
+            User = await _context.User
+                .Where(u => u.Email == Email)
+                .ToListAsync();
+            
+            HttpContext.Session.SetInt32("UserId", User.First().Id);
+
+            return RedirectToPage("Account/Index");
         }
 
         return Page();

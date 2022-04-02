@@ -16,13 +16,20 @@
 
 <div class="topnav">
     @{
-        string path = @Model.Request.Path.ToString();
+        string path = Model.Request.Path.ToString().ToLower();
     }
     
     <a class="@(path == "/" ? "active" : "")" href="/">Головна</a>
-    <a class="@(path.Contains("routes") ? "active" : "")" href="/routes">Пошук маршрутів</a>
+    <a class="@(path.Contains("routes") ? "active" : "")" href="/Routes">Пошук маршрутів</a>
     <div class="topnav-right">
-        <a class="@(path.Contains("auth") ? "active" : "")" href="/auth/login">Авторизація</a>
+        @if (Context.Session.GetString("UserId") != null)
+        {
+            <a class="@(path.Contains("account") ? "active" : "")" href="/Account">Аккаунт</a>
+        }
+        else
+        {
+            <a class="@(path.Contains("auth") ? "active" : "")" href="/Auth/Login">Авторизація</a>
+        }
     </div>
 </div>
 
