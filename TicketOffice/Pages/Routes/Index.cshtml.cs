@@ -8,7 +8,7 @@ namespace TicketOffice.Pages.Routes;
 
 public class IndexModel : PageModel
 {
-    public List<Route> Routes { get; set; } = null!;
+    public List<Route> Routes { get; set; }
     [BindProperty(SupportsGet = true)] public string From { get; set; }
     [BindProperty(SupportsGet = true)] public string To { get; set; }
     [BindProperty(SupportsGet = true)] public DateTime Date { get; set; } = new DateTime(2022, 03, 28, 0, 0, 0).Date;
@@ -23,8 +23,11 @@ public class IndexModel : PageModel
 
     public void OnGet()
     {
-        RetrieveAllRoutes();
-
+        if (!string.IsNullOrWhiteSpace(From) || !string.IsNullOrWhiteSpace(To))
+        {
+            RetrieveAllRoutes();
+        }
+        
         if (!string.IsNullOrWhiteSpace(From))
         {
             FilterRoutesByFrom();
@@ -35,7 +38,10 @@ public class IndexModel : PageModel
             FilterRoutesByTo();
         }
 
-        FilterRoutesByDate();
+        if (!string.IsNullOrWhiteSpace(From) || !string.IsNullOrWhiteSpace(To))
+        {
+            FilterRoutesByDate();
+        }
     }
 
     public void OnGetSortByNumber()
@@ -119,6 +125,11 @@ public class IndexModel : PageModel
         });
     }
 
+    public void OnGetBuyTicket(int routeId)
+    {
+        
+    }
+    
     private void RetrieveAllRoutes()
     {
         Routes = _context.Route
