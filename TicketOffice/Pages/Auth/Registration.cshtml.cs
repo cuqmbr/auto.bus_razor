@@ -57,7 +57,7 @@ public class RegistrationModel : PageModel
             
             HttpContext.Session.SetInt32("UserId", User.First().Id);
 
-            return RedirectToPage("Account/Index");
+            return RedirectToPage("/Account/Index");
         }
 
         return Page();
