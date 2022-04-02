@@ -45,129 +45,129 @@
         <div class="route-list">
             <table>
                 <thead>
-                    <tr>
-                        <th>
-                            № автобуса
-                            @if (Model.SortString == "increasingNumber")
+                <tr>
+                    <th>
+                        № автобуса
+                        @if (Model.SortString == "increasingNumber")
+                        {
+                            <a class="link-btn-sort" asp-page-handler="SortByNumber" asp-route-SortString="descendingNumber" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠕</a>
+                        }
+                        else if (Model.SortString == "descendingNumber")
+                        {
+                            <a class="link-btn-sort" asp-page-handler="SortByNumber" asp-route-SortString="increasingNumber" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠗</a>
+                        }
+                        else
+                        {
+                            <a class="link-btn-sort" asp-page-handler="SortByNumber" asp-route-SortString="increasingNumber" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>⮁</a>
+                        }
+                    </th>
+                    <th>
+                        Звідки / Куди
+                    </th>
+                    <th>
+                        Дата
+                    </th>
+                    <th>
+                        <div class="departure">
+                            Відправлення
+                            @if (Model.SortString == "increasingDeparture")
                             {
-                                <a class="link-btn-sort" asp-page-handler="SortByNumber" asp-route-SortString="descendingNumber" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠕</a>
+                                <a class="link-btn-sort" asp-page-handler="SortByDeparture" asp-route-SortString="descendingDeparture" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠕</a>
                             }
-                            else if (Model.SortString == "descendingNumber")
+                            else if (Model.SortString == "descendingDeparture")
                             {
-                                <a class="link-btn-sort" asp-page-handler="SortByNumber" asp-route-SortString="increasingNumber" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠗</a>
-                            }
-                            else
-                            {
-                                <a class="link-btn-sort" asp-page-handler="SortByNumber" asp-route-SortString="increasingNumber" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>⮁</a>
-                            }
-                        </th>
-                        <th>
-                            Звідки / Куди
-                        </th>
-                        <th>
-                            Дата
-                        </th>
-                        <th>
-                            <div class="departure">
-                                Відправлення
-                                @if (Model.SortString == "increasingDeparture")
-                                {
-                                    <a class="link-btn-sort" asp-page-handler="SortByDeparture" asp-route-SortString="descendingDeparture" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠕</a>
-                                }
-                                else if (Model.SortString == "descendingDeparture")
-                                {
-                                    <a class="link-btn-sort" asp-page-handler="SortByDeparture" asp-route-SortString="increasingDeparture" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠗</a>
-                                }
-                                else
-                                {
-                                    <a class="link-btn-sort" asp-page-handler="SortByDeparture" asp-route-SortString="increasingDeparture" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>⮁</a>
-                                }
-                            </div>
-                            <div class="arrival">
-                                Прибуття
-                                @if (Model.SortString == "increasingArrival")
-                                {
-                                    <a class="link-btn-sort" asp-page-handler="SortByArrival" asp-route-SortString="descendingArrival" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠕</a>
-                                }
-                                else if (Model.SortString == "descendingArrival")
-                                {
-                                    <a class="link-btn-sort" asp-page-handler="SortByArrival" asp-route-SortString="increasingArrival" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠗</a>
-                                }
-                                else
-                                {
-                                    <a class="link-btn-sort" asp-page-handler="SortByArrival" asp-route-SortString="increasingArrival" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>⮁</a>
-                                }
-                            </div>
-                        </th>
-                        <th>
-                            Тривалість
-                            @if (Model.SortString == "increasingDuration")
-                            {
-                                <a class="link-btn-sort" asp-page-handler="SortByDuration" asp-route-SortString="descendingDuration" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠕</a>
-                            }
-                            else if (Model.SortString == "descendingDuration")
-                            {
-                                <a class="link-btn-sort" asp-page-handler="SortByDuration" asp-route-SortString="increasingDuration" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠗</a>
+                                <a class="link-btn-sort" asp-page-handler="SortByDeparture" asp-route-SortString="increasingDeparture" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠗</a>
                             }
                             else
                             {
-                                <a class="link-btn-sort" asp-page-handler="SortByDuration" asp-route-SortString="increasingDuration" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>⮁</a>
+                                <a class="link-btn-sort" asp-page-handler="SortByDeparture" asp-route-SortString="increasingDeparture" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>⮁</a>
                             }
-                        </th>
-                        <th>
-                            Вільніих місць
-                        </th>
-                        <th>
-                            Дії
-                        </th>
-                    </tr>
+                        </div>
+                        <div class="arrival">
+                            Прибуття
+                            @if (Model.SortString == "increasingArrival")
+                            {
+                                <a class="link-btn-sort" asp-page-handler="SortByArrival" asp-route-SortString="descendingArrival" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠕</a>
+                            }
+                            else if (Model.SortString == "descendingArrival")
+                            {
+                                <a class="link-btn-sort" asp-page-handler="SortByArrival" asp-route-SortString="increasingArrival" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠗</a>
+                            }
+                            else
+                            {
+                                <a class="link-btn-sort" asp-page-handler="SortByArrival" asp-route-SortString="increasingArrival" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>⮁</a>
+                            }
+                        </div>
+                    </th>
+                    <th>
+                        Тривалість
+                        @if (Model.SortString == "increasingDuration")
+                        {
+                            <a class="link-btn-sort" asp-page-handler="SortByDuration" asp-route-SortString="descendingDuration" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠕</a>
+                        }
+                        else if (Model.SortString == "descendingDuration")
+                        {
+                            <a class="link-btn-sort" asp-page-handler="SortByDuration" asp-route-SortString="increasingDuration" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>🠗</a>
+                        }
+                        else
+                        {
+                            <a class="link-btn-sort" asp-page-handler="SortByDuration" asp-route-SortString="increasingDuration" asp-route-From=@Model.From a in a  asp-route-To=@Model.To asp-route-Date=@Model.Date.ToString("yyyy-MM-dd")>⮁</a>
+                        }
+                    </th>
+                    <th>
+                        Вільніих місць
+                    </th>
+                    <th>
+                        Дії
+                    </th>
+                </tr>
                 </thead>
                 <tbody>
-                    @foreach (var route in Model.Routes)
-                    {
-                        <tr class="table-row">
-                            <td class="num">
-                                <div>@route.Number</div>
-                                <div class="city-list-btn"><a class="city-list-btn">Маршрут</a></div>
-                            </td>
-                            <td class="city">
-                                <div>@route.Cities.First().Name</div>
-                                <div>@route.Cities.Last().Name</div>
-                            </td>
-                            <td>
-                                <div class="route-date">
-                                    <span>
-                                        Відправлення
-                                    </span>
-                                    <span>
-                                        @route.Cities.First().ArrivalTime?.ToString("f").Split(",")[0].ToLower(),
-                                        @route.Cities.First().DepartureTime?.ToString("dd.MM.yyyy")
-                                    </span>
-                                </div>
-                                <div class="route-date">
-                                    <span>Прибуття</span>
-                                    <span>
-                                        @route.Cities.Last().ArrivalTime?.ToString("f").Split(",")[0].ToLower(),
-                                        @route.Cities.Last().ArrivalTime?.ToString("dd.MM.yyyy")
-                                    </span>
-                                </div>
-                            </td>
-                            <td class="time">
-                                <div>@route.Cities.First().DepartureTime?.ToString("HH:mm")</div>
-                                <div>@route.Cities.Last().ArrivalTime?.ToString("HH:mm")</div>
-                            </td>
-                            <td class="duration">
-                                @{ TimeSpan? duration = route.Cities.Last().ArrivalTime - route.Cities.First().DepartureTime; }
-                                @($"{duration?.TotalHours.ToString().Split(",")[0]}:{duration?.Minutes}")
-                            </td>
-                            <td class="capacity">
-                                @(route.Capacity - route.Tickets.Count)
-                            </td>
-                            <td class="action">
-                                <a class="link-btn-choose">Вибрати</a>
-                            </td>
-                        </tr>
-                    }
+                @foreach (var route in Model.Routes)
+                {
+                    <tr class="table-row">
+                        <td class="num">
+                            <div>@route.Number</div>
+                            <div class="city-list-btn"><a class="city-list-btn" onclick="document.getElementById('popup-city-list-@route.Id').style.display = 'inherit'">Маршрут</a></div>
+                        </td>
+                        <td class="city">
+                            <div>@route.Cities.First().Name</div>
+                            <div>@route.Cities.Last().Name</div>
+                        </td>
+                        <td>
+                            <div class="route-date">
+                                <span>
+                                    Відправлення
+                                </span>
+                                <span>
+                                    @route.Cities.First().ArrivalTime?.ToString("f").Split(",")[0].ToLower(),
+                                    @route.Cities.First().DepartureTime?.ToString("dd.MM.yyyy")
+                                </span>
+                            </div>
+                            <div class="route-date">
+                                <span>Прибуття</span>
+                                <span>
+                                    @route.Cities.Last().ArrivalTime?.ToString("f").Split(",")[0].ToLower(),
+                                    @route.Cities.Last().ArrivalTime?.ToString("dd.MM.yyyy")
+                                </span>
+                            </div>
+                        </td>
+                        <td class="time">
+                            <div>@route.Cities.First().DepartureTime?.ToString("HH:mm")</div>
+                            <div>@route.Cities.Last().ArrivalTime?.ToString("HH:mm")</div>
+                        </td>
+                        <td class="duration">
+                            @{ TimeSpan? duration = route.Cities.Last().ArrivalTime - route.Cities.First().DepartureTime; }
+                            @($"{duration?.TotalHours.ToString().Split(",")[0]}:{duration?.Minutes}")
+                        </td>
+                        <td class="capacity">
+                            @(route.Capacity - route.Tickets.Count)
+                        </td>
+                        <td class="action">
+                            <a class="link-btn-choose">Вибрати</a>
+                        </td>
+                    </tr>
+                }
                 </tbody>
             </table>
         </div>
@@ -180,3 +180,93 @@
     }
     
 </div>
+
+@if (Model.Routes != null)
+{
+    foreach (var route in Model.Routes)
+    {
+        <div class="popup-container" id="popup-city-list-@route.Id">
+            <div class="popup">
+                <div class="popup-header">
+                    <div class="popup-header-center">
+                        Автобус №@route.Number
+                    </div>
+                </div>
+                <div class="popup-body">
+                    <div class="popup-body-main">
+                        <table>
+                            <thead>
+                            <tr class="tr-intermediate">
+                                <th class="th-route">
+                                    Інформація
+                                </th>
+                                <th class="th-route">
+                                    Місто
+                                </th>
+                                <th class="th-route">
+                                    Час прибуття
+                                </th>
+                                <th class="th-route">
+                                    Час відправлення
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="tr-departure">
+                                <td class="td-route">
+                                    Відправлення
+                                </td>
+                                <td class="td-route">
+                                    @route.Cities.First().Name
+                                </td>
+                                <td class="td-route">
+                                    -
+                                </td>
+                                <td class="td-route">
+                                    @route.Cities.First().DepartureTime?.ToString("HH:mm")
+                                </td>
+                            </tr>
+                            
+                            @for (int i = 1; i < route.Cities.Count - 1; i++)
+                            {
+                                <tr class="tr-intermediate">
+                                    <td class="td-route">
+                                        Проміжна станція
+                                    </td>
+                                    <td class="td-route">
+                                        @route.Cities.ToList()[i].Name
+                                    </td>
+                                    <td class="td-route">
+                                        @route.Cities.ToList()[i].ArrivalTime?.ToString("HH:mm")
+                                    </td>
+                                    <td class="td-route">
+                                        @route.Cities.ToList()[i].DepartureTime?.ToString("HH:mm")
+                                    </td>
+                                </tr>
+                            }
+                            
+                            <tr class="tr-arrival">
+                                <td class="td-route">
+                                    Прибуття
+                                </td>
+                                <td class="td-route">
+                                    @route.Cities.Last().Name
+                                </td>
+                                <td class="td-route">
+                                    @route.Cities.Last().ArrivalTime?.ToString("HH:mm")
+                                </td>
+                                <td class="td-route">
+                                    -
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="popup-body-footer">
+                        <a class="link-btn-choose" onclick="document.getElementById('popup-city-list-@route.Id').style.display = 'none'">Закрити</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
