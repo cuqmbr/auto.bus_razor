@@ -1,6 +1,19 @@
 ﻿@page
 @model TicketOffice.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Головна";
 }
 
+<link rel="stylesheet" href="~/css/Index.css"/>
+
+<div class="background">
+    <div class="background-shadow"></div>
+    <div class="title-block">
+        <div class="title-header">
+            auto.bus - пошук автобусніх рейсів
+        </div>
+        <div class="title-footer">
+            <a class="link-btn" href="/Routes">Знайти рейс</a>
+        </div>
+    </div>
+</div>
