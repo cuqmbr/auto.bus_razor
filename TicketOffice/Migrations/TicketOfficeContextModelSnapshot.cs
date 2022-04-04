@@ -67,6 +67,17 @@ namespace TicketOffice.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("PassengerFirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PassengerLastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PassengerPlace")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("RouteId")
                         .HasColumnType("INTEGER");
 

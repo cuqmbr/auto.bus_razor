@@ -9,7 +9,7 @@
 
 
 
-<link rel="stylesheet" href="~/css/Routes.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/Routes.css"/>
 
 <div class="wrapper">
     
@@ -19,20 +19,20 @@
                 <div class="title">
                     Звідки
                 </div>
-                <input type="text" autocomplete="off" asp-for="From">
+                <input class="search-input" type="text" autocomplete="off" asp-for="From">
             </div>
             <a class="change-dir"></a>
             <div class="station">
                 <div class="title">
                     Куди
                 </div>
-                <input type="text" autocomplete="off" asp-for="To">
+                <input class="search-input" type="text" autocomplete="off" asp-for="To">
             </div>
             <div class="date">
                 <div class="title">
                     Дата відправлення
                 </div>
-                <input type="date" value="@Model.Date.ToString("yyyy-MM-dd")" asp-for="Date">
+                <input class="search-input" type="date" value="@Model.Date.ToString("yyyy-MM-dd")" asp-for="Date">
             </div>
             <div class="search-btn">
                 <input type="submit" class="search-btn" value="Пошук"/>
@@ -164,7 +164,7 @@
                             @(route.Capacity - route.Tickets.Count)
                         </td>
                         <td class="action">
-                            <a class="link-btn-choose">Вибрати</a>
+                            <a class="link-btn-choose" onclick="document.getElementById('popup-ticket-@route.Id').style.display = 'inherit'">Обрати</a>
                         </td>
                     </tr>
                 }
@@ -194,9 +194,7 @@
         <div class="popup-container" id="popup-city-list-@route.Id">
             <div class="popup">
                 <div class="popup-header">
-                    <div class="popup-header-center">
-                        Автобус №@route.Number
-                    </div>
+                    Автобус №@route.Number
                 </div>
                 <div class="popup-body">
                     <div class="popup-body-main">
@@ -269,7 +267,92 @@
                         </table>
                     </div>
                     <div class="popup-body-footer">
-                        <a class="link-btn-choose" onclick="document.getElementById('popup-city-list-@route.Id').style.display = 'none'">Закрити</a>
+                        <a class="popup-footer-button" onclick="document.getElementById('popup-city-list-@route.Id').style.display = 'none'">Закрити</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@if (Model.Routes != null)
+{
+    foreach (var route in Model.Routes)
+    {
+        <div class="popup-container" id="popup-ticket-@route.Id">
+            <div class="ticket">
+                <div class="ticket-header">
+                    Купити квиток
+                </div>
+                <div class="ticket-body">
+                    <div class="ticket-body-main">
+                        <form class="ticket-form" method="post" id="ticket-form-@route.Id" novalidate>
+                            <div class="ticket-input-item" style="margin-right: 0.5rem">
+                                <input class="ticket-input-lastname" type="text" placeholder="Прізвище" @(HttpContext.Session.GetInt32("UserId").HasValue ? "" : "readonly") asp-for="PassengerLastName"/>
+                                <div class="ticket-validation-error"><span asp-validation-for="PassengerLastName"></span></div>
+                            </div>
+                            <div class="ticket-input-item" style="margin-left: 0.5rem; margin-right: 0.5rem">
+                                <input class="ticket-input-firstname" type="text" placeholder="Ім'я" @(HttpContext.Session.GetInt32("UserId").HasValue ? "" : "readonly") asp-for="PassengerFirstName"/>
+                                <div class="ticket-validation-error"><span asp-validation-for="PassengerFirstName"></span></div>
+                            </div>
+                            <div class="ticket-input-item" style="margin-left: 0.5rem">
+                                <select class="ticket-place-select" required @(HttpContext.Session.GetInt32("UserId").HasValue ? "" : "disabled") asp-for="PassengerPlace">
+                                    <option selected disabled value="">Місце</option>
+                                    @for (int i = 1; i <= route.Capacity; i++)
+                                    {
+                                        if (!route.Tickets.Any(t => t.PassengerPlace == i))
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    }
+                                </select>
+                                <div class="ticket-validation-error"><span asp-validation-for="PassengerPlace"></span></div>
+                            </div>
+                        </form>
+                        <div class="ticket-info">
+                            <div class="ticket-info-line">
+                                <div class="ticket-info-line-left">
+                                    Номер маршруту
+                                </div>
+                                <div class="ticket-info-line-right">
+                                    № @route.Number
+                                </div>
+                            </div>
+                            <div class="ticket-info-line">
+                                <div class="ticket-info-line-left">
+                                    Дата відправлення
+                                </div>
+                                <div class="ticket-info-line-right">
+                                    @route.Cities.First().DepartureTime?.ToString("f").Split(",")[0].ToLower(), 
+                                    @route.Cities.First().DepartureTime?.ToString("dd.MM.yyyy"), 
+                                    @route.Cities.First().DepartureTime?.ToString("HH:mm"), 
+                                    @route.Cities.First().Name
+                                </div>
+                            </div>
+                            <div class="ticket-info-line">
+                                <div class="ticket-info-line-left">
+                                    Дата прибуття
+                                </div>
+                                <div class="ticket-info-line-right">
+                                    <div class="ticket-info-line-right-block">
+                                        @route.Cities.Last().ArrivalTime?.ToString("f").Split(",")[0].ToLower(),&nbsp;
+                                    </div>
+                                    <div class="ticket-info-line-right-block">
+                                        @route.Cities.Last().ArrivalTime?.ToString("dd.MM.yyyy"),&nbsp;
+                                    </div>
+                                    <div class="ticket-info-line-right-block">
+                                        @route.Cities.Last().ArrivalTime?.ToString("HH:mm"),&nbsp;
+                                    </div>
+                                    <div class="ticket-info-line-right-block">
+                                        @route.Cities.Last().Name
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ticket-body-footer">
+                        <a class="popup-footer-link-button" onclick="document.getElementById('popup-ticket-@route.Id').style.display = 'none'">Закрити</a>
+                        <input class="popup-footer-button" type="submit" form="ticket-form-@route.Id" value="Купити">
                     </div>
                 </div>
             </div>

@@ -8,6 +8,19 @@ public class Ticket
     [Key]
     public int Id { get; set; }
     
+    [Required(ErrorMessage = "Поле має бути заповненим")]
+    [Display(Name = "Ім'я пасажира")]
+    public string PassengerFirstName { get; set; }
+    
+    [Required(ErrorMessage = "Поле має бути заповненим")]
+    [Display(Name = "Прізвище пасажира")]
+    public string PassengerLastName { get; set; }
+    
+    [Required(ErrorMessage = "Поле має бути заповненим")]
+    [Display(Name = "Номер місця пасажира")]
+    public int PassengerPlace { get; set; }
+    
+    
     [ForeignKey("User")]
     public int UserId { get; set; }
     public User User { get; set; }

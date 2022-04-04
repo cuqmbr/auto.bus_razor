@@ -69,6 +69,9 @@ namespace TicketOffice.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    PassengerFirstName = table.Column<string>(type: "TEXT", nullable: false),
+                    PassengerLastName = table.Column<string>(type: "TEXT", nullable: false),
+                    PassengerPlace = table.Column<int>(type: "INTEGER", nullable: false),
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
                     RouteId = table.Column<int>(type: "INTEGER", nullable: false)
                 },

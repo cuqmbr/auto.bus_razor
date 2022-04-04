@@ -9,10 +9,15 @@ namespace TicketOffice.Pages.Routes;
 public class IndexModel : PageModel
 {
     public List<Route> Routes { get; set; }
+    
     [BindProperty(SupportsGet = true)] public string From { get; set; }
     [BindProperty(SupportsGet = true)] public string To { get; set; }
     [BindProperty(SupportsGet = true)] public DateTime Date { get; set; } = new DateTime(2022, 03, 28, 0, 0, 0).Date;
     [BindProperty(SupportsGet = true)] public string SortString { get; set; }
+    
+    public string PassengerFirstName { get; set; }
+    public string PassengerLastName { get; set; }
+    public int PassengerPlace { get; set; }
     
     private readonly TicketOfficeContext _context;
 
@@ -40,7 +45,7 @@ public class IndexModel : PageModel
 
         if (!string.IsNullOrWhiteSpace(From) || !string.IsNullOrWhiteSpace(To))
         {
-            FilterRoutesByDate();
+            //FilterRoutesByDate();
         }
     }
 
@@ -125,11 +130,6 @@ public class IndexModel : PageModel
         });
     }
 
-    public void OnGetBuyTicket(int routeId)
-    {
-        
-    }
-    
     private void RetrieveAllRoutes()
     {
         Routes = _context.Route
@@ -142,7 +142,7 @@ public class IndexModel : PageModel
     {
        
         Routes.ForEach(r => r.Cities = r.Cities
-            .SkipWhile(c => c.Name != From)
+            .SkipWhile(c => c.Name.ToLower() != From.Trim().ToLower())
             .ToList());
 
         Routes.RemoveAll(r => r.Cities.Count < 2);
@@ -152,7 +152,7 @@ public class IndexModel : PageModel
     {
        
         Routes.ForEach(r => r.Cities = r.Cities
-            .Reverse().SkipWhile(c => c.Name != To)
+            .Reverse().SkipWhile(c => c.Name.ToLower() != To.Trim().ToLower())
             .Reverse().ToList());
 
         Routes.RemoveAll(r => r.Cities.Count < 2);
