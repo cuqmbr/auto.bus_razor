@@ -24,7 +24,7 @@
     <div class="topnav-right">
         @if (Context.Session.GetString("UserId") != null)
         {
-            <a class="@(path.Contains("account") ? "active" : "")" href="/Account">Аккаунт</a>
+            <a class="@(path.Contains("account") ? "active" : "")" href="/Auth/Account">Аккаунт</a>
         }
         else
         {

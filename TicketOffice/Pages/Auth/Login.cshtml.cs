@@ -9,11 +9,13 @@ namespace TicketOffice.Pages.Auth;
 
 public class LoginModel : PageModel
 {
-    public IList<User> User { get; set; }
-    [BindProperty] public string Email { get; set; }
-    [BindProperty] public string Password { get; set; }
-    public string emailValidation;
-    public string passwordValidation;
+    [BindProperty] public string Email { get; set; } = String.Empty;
+    [BindProperty] public string Password { get; set; } = String.Empty;
+    
+    public string EmailValidation;
+    public string PasswordValidation;
+    
+    private List<User> User { get; set; }
 
     private readonly TicketOfficeContext _context;
     
@@ -22,76 +24,71 @@ public class LoginModel : PageModel
         _context = context;
     }
 
-    public IActionResult OnGet()
+    public ActionResult OnGet() => ValidateSession() ? RedirectToPage("/Auth/Account") : Page();
+
+    public ActionResult OnPost()
     {
-        if (HttpContext.Session.GetInt32("UserId") != null)
-        {
-            return RedirectToPage("/Account/Index");
-        }
-        
-        return Page();
-    }
-
-    public async Task<IActionResult> OnPostAsync()
-    {
-        emailValidation = String.Empty;
-        passwordValidation = String.Empty;
-
-        User = await _context.User
-            .Where(u => u.Email == Email)
-            .ToListAsync();
-
-        if (ValidateEmail(Email, out emailValidation) && ValidatePassword(Password, out passwordValidation))
+        if (ValidateForm())
         {
             HttpContext.Session.SetInt32("UserId", User.First().Id);
-
-            return RedirectToPage("/Account/Index");
+            return RedirectToPage("/Auth/Account");
         }
 
         return Page();
     }
 
-    public bool ValidateEmail(string email, out string validationError)
+    private bool ValidateForm()
     {
-        if (User.Any(u => u.Email == email))
-        {
-            validationError = String.Empty;
-            return true;
-        }
+        User = _context.User
+            .Where(u => u.Email == Email)
+            .ToList();
+
+        return ValidateEmail(Email, out EmailValidation) && ValidatePassword(Password, out PasswordValidation);
         
-        if (String.IsNullOrWhiteSpace(email))
+        bool ValidateEmail(string email, out string validationError)
         {
-            validationError = "Поле має бути заповненим";
-            return false;
-        }
+            if (User.Count == 1)
+            {
+                validationError = String.Empty;
+                return true;
+            }
         
-        Regex emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            if (String.IsNullOrWhiteSpace(email))
+            {
+                validationError = "Поле має бути заповненим";
+                return false;
+            }
         
-        if (!emailRegex.IsMatch(email))
-        {
-            validationError = "E-mail некоректний";
+            Regex emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+        
+            if (!emailRegex.IsMatch(email))
+            {
+                validationError = "E-mail некоректний";
+                return false;
+            }
+
+            validationError = "E-mail не зареєстровано";
             return false;
         }
 
-        validationError = "E-mail не зареєстровано";
-        return false;
+        bool ValidatePassword(string password, out string validationError)
+        {
+            if (User.First().Password == password)
+            {
+                validationError = String.Empty;
+                return true;
+            }
+        
+            if (String.IsNullOrWhiteSpace(password))
+            {
+                validationError = "Поле має бути заповненим";
+                return false;
+            }
+
+            validationError = "Неправильний пароль";
+            return false;
+        }
     }
-
-    public bool ValidatePassword(string password, out string validationError)
-    {
-        if (User.Where(u => u.Email == Email).Any(u => u.Password == password))
-        {
-            validationError = String.Empty;
-            return true;
-        }
-        
-        if (String.IsNullOrWhiteSpace(password))
-        {
-            validationError = "Поле має бути заповненим";
-            return false;
-        }
-
-        validationError = "Неправильний пароль";
-        return false;
-    }
+    
+    private bool ValidateSession() => HttpContext.Session.GetInt32("UserId") is not null;
 }

@@ -14,7 +14,7 @@ body {
 .topnav {
     width: 100%;
     background-color: white;
-    border-bottom: .2rem solid #78b5da;
+    border-bottom: .2rem solid #9ccdf0;
     overflow: auto;
 }
 
@@ -32,7 +32,7 @@ body {
 }
 
 .topnav a.active {
-    background-color: #79b6db;
+    background-color: #9ccdf0;
 }
 
 .topnav-right {
