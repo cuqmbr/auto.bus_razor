@@ -11,6 +11,10 @@ public class IndexModel : PageModel
 {
     [BindProperty] public List<Route> Routes { get; set; }
     [BindProperty] public Ticket Ticket { get; set; }
+
+    public string PassengerLastNameValidationError;
+    public string PassengerFirstNameValidationError;
+    public string PassengerPlaceValidationError;
     
     [BindProperty(SupportsGet = true)] public string From { get; set; }
     [BindProperty(SupportsGet = true)] public string To { get; set; }
@@ -19,12 +23,12 @@ public class IndexModel : PageModel
 
     private readonly TicketOfficeContext _context;
 
-    public IndexModel(TicketOfficeContext context)
+    public IndexModel(TicketOfficeContext context, ILogger<IndexModel> logger)
     {
         _context = context;
     }
 
-    public void OnGet()
+    public ActionResult OnGet()
     {
         if (!string.IsNullOrWhiteSpace(From) || !string.IsNullOrWhiteSpace(To))
         {
@@ -45,24 +49,26 @@ public class IndexModel : PageModel
         {
             FilterRoutesByDate();
         }
+
+        return Page();
     }
 
     public ActionResult OnPost()
     {
-        Ticket.User = _context.User.Where(u => u.Id == Ticket.UserId).ToList()[0];
-        Ticket.Route = _context.Route.Where(r => r.Id == Ticket.RouteId).ToList()[0];
+        if (!PassengerNameValidation(Ticket.PassengerLastName, out PassengerLastNameValidationError) | !PassengerNameValidation(Ticket.PassengerFirstName, out PassengerFirstNameValidationError) | !PassengerPlaceValidation(Ticket.PassengerPlace, out PassengerPlaceValidationError))
+            return OnGet();
         
         _context.Ticket.Add(Ticket);
-        _context.SaveChangesAsync();
+        _context.SaveChanges();
         
-        return RedirectToPage("/Account/Index");
+        return RedirectToPage("/Auth/Account");
     }
     
     public void OnGetSortByNumber()
     {
         OnGet();
 
-        if (SortString == "increasingNumber")
+        if (SortString == "increasingNumber dependencies")
         {
             Routes.Sort((x, y) => Math.Clamp(x.Number - y.Number, -1, 1));
         }
@@ -168,5 +174,29 @@ public class IndexModel : PageModel
     private void FilterRoutesByDate()
     {
         Routes.RemoveAll(r => r.Cities.First().DepartureTime.Value.DayOfYear != Date.DayOfYear);
+    }
+
+    private bool PassengerNameValidation(string? name, out string validationError)
+    {
+        if (String.IsNullOrEmpty(name))
+        {
+            validationError = "Поле має бути заповненим";
+            return false;
+        }
+
+        validationError = String.Empty;
+        return true;
+    }
+
+    private bool PassengerPlaceValidation(int place, out string validationError)
+    {
+        if (place == 0)
+        {
+            validationError = "Поле має бути заповненим";
+            return false;
+        }
+        
+        validationError = String.Empty;
+        return true;
     }
 }

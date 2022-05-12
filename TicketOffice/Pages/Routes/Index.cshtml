@@ -1,5 +1,6 @@
 ﻿@page
 @using System.Globalization
+@using TicketOffice.Models
 @model TicketOffice.Pages.Routes.IndexModel
 @{
     Layout = "~/Pages/Shared/_Layout.cshtml";
@@ -10,6 +11,7 @@
 
 
 <link rel="stylesheet" href="~/css/Routes.css"/>
+<link rel="stylesheet" href="~/css/Popup.css"/>
 
 <div class="wrapper">
     
@@ -279,7 +281,9 @@
 {
     foreach (var route in Model.Routes)
     {
-        <div class="popup-container" id="popup-ticket-@route.Id">
+        <div class="popup-container" id="popup-ticket-@route.Id" style='display:@(Model.Ticket is not null && Model.Ticket.RouteId == route
+        .Id 
+        ? "inherit" : "none")'>
             <div class="ticket">
                 <div class="ticket-header">
                     Купити квиток
@@ -296,6 +300,8 @@
                                 {
                                     <input class="ticket-input-lastname" type="text" placeholder="Прізвище" readonly/>
                                 }
+                                <div 
+                                class="ticket-validation-error"><span>@(Model.Ticket is not null && Model.Ticket.RouteId == route.Id ? Model.PassengerLastNameValidationError : "")</span></div>
                             </div>
                             <div class="ticket-input-item" style="margin-left: 0.5rem; margin-right: 0.5rem">
                                 @if (HttpContext.Session.GetInt32("UserId").HasValue)
@@ -306,6 +312,8 @@
                                 {
                                     <input class="ticket-input-firstname" type="text" placeholder="Ім'я" readonly/>
                                 }
+                                <div 
+                                class="ticket-validation-error"><span>@(Model.Ticket is not null && Model.Ticket.RouteId == route.Id ? Model.PassengerFirstNameValidationError : "")</span></div>
                             </div>
                             <div class="ticket-input-item" style="margin-left: 0.5rem">
                                 <select class="ticket-place-select" required asp-for="Ticket.PassengerPlace">
@@ -322,6 +330,8 @@
                                         }
                                     }
                                 </select>
+                                <div 
+                                class="ticket-validation-error"><span>@(Model.Ticket is not null && Model.Ticket.RouteId == route.Id ? Model.PassengerPlaceValidationError : "")</span></div>
                             </div>
                             <input type="number" value="@route.Id" style="display: none;" asp-for="Ticket.RouteId"/>
                             <input type="number" value="@HttpContext.Session.GetInt32("UserId")" style="display: none;" asp-for="Ticket.UserId"/>
