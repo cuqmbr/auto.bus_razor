@@ -1,11 +1,152 @@
 @page
+@using System.Globalization
 @model TicketOffice.Pages.Account.IndexModel
-
 @{
     Layout = "~/Pages/Shared/_Layout.cshtml";
     ViewData["Title"] = "Аккаунт";
+    CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("uk-UA");
 }
 
 <link rel="stylesheet" href="~/css/Account.css"/>
+<link rel="stylesheet" href="~/css/Popup.css"/>
 
+<div class="section">
+    <div class="section-header">Придбані квитки</div>
+    @if (Model.Tickets is {Count: 0})
+    {
+        <div class="section-text">Ви не придбали жодного квитка. <a href="/Routes" class="link">Пошук маршрутів</a></div>
+    }
+    else
+    {
+        <div class="tickets">
+            @foreach (var ticket in Model.Tickets)
+            {
+                <div class="tickets">
+                    <div class="ticket">
+                        <div class="ticket-header">Квиток № @ticket.Id</div>
+                        <div class="ticket-body">
+                            <div class="ticket-info">
+                                <div class="ticket-info-line">
+                                    <span>Пасажир, місце:</span>
+                                    <span>@ticket.PassengerLastName @ticket.PassengerFirstName, @ticket.PassengerPlace</span>
+                                </div>
+                                <div class="ticket-info-line">
+                                    <span>Номер рейсу:</span>
+                                    <span> № @ticket.Route.Number</span>
+                                </div>
+                                <div class="ticket-info-line date">
+                                    <span>Дата відправлення:</span>
+                                    <span>
+                                        @ticket.Route.Cities.First().DepartureTime?.ToString("f").Split(",")[0].ToLower(), 
+                                        @ticket.Route.Cities.First().DepartureTime?.ToString("dd.MM.yyyy"), 
+                                        @ticket.Route.Cities.First().DepartureTime?.ToString("HH:mm")
+                                    </span>
+                                </div>
+                                <div class="ticket-info-line date">
+                                    <span>Дата прибуття:</span>
+                                    <span>
+                                        @ticket.Route.Cities.Last().ArrivalTime?.ToString("f").Split(",")[0].ToLower(), 
+                                        @ticket.Route.Cities.Last().ArrivalTime?.ToString("dd.MM.yyyy"), 
+                                        @ticket.Route.Cities.Last().ArrivalTime?.ToString("HH:mm")
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ticket-footer">
+                            <a class="ticket-link-btn" onclick="document.getElementById('popup-city-list-@ticket.Id').style.display = 'inherit'">Маршрут</a>
+                            <a class="ticket-link-btn" asp-page-handler="ReturnTicket" asp-route-ReturnTicketId="@ticket.Id">Повернути</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="popup-container" id="popup-city-list-@ticket.Id">
+                    <div class="popup">
+                        <div class="popup-header">
+                            Автобус №@ticket.Route.Number
+                        </div>
+                        <div class="popup-body">
+                            <div class="popup-body-main">
+                                <table>
+                                    <thead>
+                                    <tr class="tr-intermediate">
+                                        <th class="th-route">
+                                            Інформація
+                                        </th>
+                                        <th class="th-route">
+                                            Місто
+                                        </th>
+                                        <th class="th-route">
+                                            Час прибуття
+                                        </th>
+                                        <th class="th-route">
+                                            Час відправлення
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="tr-departure">
+                                        <td class="td-route">
+                                            Відправлення
+                                        </td>
+                                        <td class="td-route">
+                                            @ticket.Route.Cities.First().Name
+                                        </td>
+                                        <td class="td-route">
+                                            -
+                                        </td>
+                                        <td class="td-route">
+                                            @ticket.Route.Cities.First().DepartureTime?.ToString("HH:mm")
+                                        </td>
+                                    </tr>
+                                    
+                                    @for (int i = 1; i < ticket.Route.Cities.Count - 1; i++)
+                                    {
+                                        <tr class="tr-intermediate">
+                                            <td class="td-route">
+                                                Проміжна станція
+                                            </td>
+                                            <td class="td-route">
+                                                @ticket.Route.Cities.ToList()[i].Name
+                                            </td>
+                                            <td class="td-route">
+                                                @ticket.Route.Cities.ToList()[i].ArrivalTime?.ToString("HH:mm")
+                                            </td>
+                                            <td class="td-route">
+                                                @ticket.Route.Cities.ToList()[i].DepartureTime?.ToString("HH:mm")
+                                            </td>
+                                        </tr>
+                                    }
+                                    
+                                    <tr class="tr-arrival">
+                                        <td class="td-route">
+                                            Прибуття
+                                        </td>
+                                        <td class="td-route">
+                                            @ticket.Route.Cities.Last().Name
+                                        </td>
+                                        <td class="td-route">
+                                            @ticket.Route.Cities.Last().ArrivalTime?.ToString("HH:mm")
+                                        </td>
+                                        <td class="td-route">
+                                            -
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="popup-body-footer">
+                                <a class="popup-footer-button" onclick="document.getElementById('popup-city-list-@ticket.Id').style.display = 'none'">Закрити</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
 
+<div class="divider"></div>
+
+<div class="section">
+    <div class="section-header">Керування аккаунтом</div>
+</div>
