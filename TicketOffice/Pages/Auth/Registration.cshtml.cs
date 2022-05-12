@@ -9,13 +9,10 @@ namespace TicketOffice.Pages.Auth;
 
 public class RegistrationModel : PageModel
 {
-    [BindProperty] public string Email { get; set; } = String.Empty;
-    [BindProperty] public string Password { get; set; } = String.Empty;
+    [BindProperty] public User User { get; set; }
     
-    public string EmailValidation;
-    public string PasswordValidation;
-    
-    private List<User> User { get; set; }
+    public string EmailValidationError;
+    public string PasswordValidationError;
 
     private readonly TicketOfficeContext _context;
     
@@ -26,19 +23,16 @@ public class RegistrationModel : PageModel
 
     public ActionResult OnGet() => ValidateSession() ? RedirectToPage("/Auth/Account") : Page();
 
-    public ActionResult OnPostAsync()
+    public ActionResult OnPost()
     {
         if (ValidateForm())
         {
-            _context.User.Add(new User {Email = Email, Password = Password});
-            
+            _context.User.Add(User);
             _context.SaveChanges();
+
+            User = _context.User.FirstOrDefault(u => u.Email == User.Email);
             
-            User = _context.User
-                .Where(u => u.Email == Email)
-                .ToList();
-            
-            HttpContext.Session.SetInt32("UserId", User.First().Id);
+            HttpContext.Session.SetInt32("UserId", User.Id);
 
             return RedirectToPage("/Auth/Account");
         }
@@ -48,7 +42,7 @@ public class RegistrationModel : PageModel
 
     private bool ValidateForm()
     {
-        return ValidateEmail(Email, out EmailValidation) && ValidatePassword(Password, out PasswordValidation);
+        return ValidateEmail(User.Email, out EmailValidationError) && ValidatePassword(User.Password, out PasswordValidationError);
 
         bool ValidateEmail(string email, out string validationError)
         {
@@ -65,12 +59,10 @@ public class RegistrationModel : PageModel
                 validationError = "E-mail некоректний";
                 return false;
             }
-                
-            User = _context.User
-                .Where(u => u.Email == Email)
-                .ToList();
-                
-            if (User.Any())
+
+            User user = _context.User.FirstOrDefault(u => u.Email == User.Email);
+
+            if (user is not null)
             {
                 validationError = "E-mail уже зареєстровано";
                 return false;

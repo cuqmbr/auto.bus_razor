@@ -14,15 +14,15 @@
             Авторизація
         </div>
         
-        <input class="field" type="text" placeholder="E-mail" autocomplete="off" asp-for="Email"/>
+        <input class="field" type="text" placeholder="E-mail" autocomplete="off" asp-for="User.Email"/>
         <div class="validation-error">
-            <span>@Model.EmailValidation</span>
+            <span>@Model.EmailValidationError</span>
         </div>
         <br>
 
-        <input class="field" type="password" placeholder="Пароль" autocomplete="off" asp-for="Password"/>
+        <input class="field" type="password" placeholder="Пароль" autocomplete="off" asp-for="User.Password"/>
         <div class="validation-error">
-            <span>@Model.PasswordValidation</span>
+            <span>@Model.PasswordValidationError</span>
         </div>
         <br>
 

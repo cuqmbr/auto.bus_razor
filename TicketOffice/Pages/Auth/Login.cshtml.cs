@@ -9,13 +9,10 @@ namespace TicketOffice.Pages.Auth;
 
 public class LoginModel : PageModel
 {
-    [BindProperty] public string Email { get; set; } = String.Empty;
-    [BindProperty] public string Password { get; set; } = String.Empty;
+    [BindProperty] public User? User { get; set; }
     
-    public string EmailValidation;
-    public string PasswordValidation;
-    
-    private List<User> User { get; set; }
+    public string EmailValidationError;
+    public string PasswordValidationError;
 
     private readonly TicketOfficeContext _context;
     
@@ -30,7 +27,10 @@ public class LoginModel : PageModel
     {
         if (ValidateForm())
         {
-            HttpContext.Session.SetInt32("UserId", User.First().Id);
+            User user = _context.User.FirstOrDefault(u => u.Email == User.Email);
+            
+            HttpContext.Session.SetInt32("UserId", user.Id);
+            HttpContext.Session.SetInt32("IsManager", user.IsManager ? 1 : 0);
             return RedirectToPage("/Auth/Account");
         }
 
@@ -39,15 +39,13 @@ public class LoginModel : PageModel
 
     private bool ValidateForm()
     {
-        User = _context.User
-            .Where(u => u.Email == Email)
-            .ToList();
+        User? user = _context.User.FirstOrDefault(u => u.Email == User.Email);
 
-        return ValidateEmail(Email, out EmailValidation) && ValidatePassword(Password, out PasswordValidation);
+        return ValidateEmail(User.Email, out EmailValidationError) && ValidatePassword(User.Password, out PasswordValidationError);
         
         bool ValidateEmail(string email, out string validationError)
         {
-            if (User.Count == 1)
+            if (user is not null)
             {
                 validationError = String.Empty;
                 return true;
@@ -73,7 +71,7 @@ public class LoginModel : PageModel
 
         bool ValidatePassword(string password, out string validationError)
         {
-            if (User.First().Password == password)
+            if (user.Password == password)
             {
                 validationError = String.Empty;
                 return true;
