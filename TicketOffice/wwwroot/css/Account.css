@@ -9,6 +9,8 @@ body {
     margin: 0;
 }
 
+/* Sections */
+
 .section {
     width: 70rem;
     margin: 1.5rem auto;
@@ -26,6 +28,8 @@ body {
     font-weight: 700;
     margin: 2rem 0;
 }
+
+/* Tickets in section */
 
 .tickets {
     display: flex;
@@ -99,6 +103,8 @@ body {
 .ticket-link-btn:hover {
     opacity: 0.8;
 }
+
+/* Misc */
 
 .link-btn {
     line-height: 2.5rem;

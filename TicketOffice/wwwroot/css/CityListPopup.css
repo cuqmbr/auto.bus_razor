@@ -1,4 +1,4 @@
-.popup-container {
+.popup-container-city-list {
     position: fixed;
     top: 0;
     left: 0;
@@ -9,7 +9,7 @@
     display: none;
 }
 
-.popup {
+.popup-city-list {
     width: 40rem;
     height: 30rem;
     background: #eaeef1;
@@ -20,7 +20,7 @@
     box-shadow: 0 10px 15px 5px #6c6e6f;
 }
 
-.popup-header {
+.popup-header-city-list {
     border-radius: 0.5rem 0.5rem 0 0;
     height: 3rem;
     background: #a1b0b9;
@@ -31,14 +31,11 @@
     line-height: 3rem;
 }
 
-.popup-body {
+.popup-body-city-list {
     width: calc(100% - 2rem);
-    height: calc(100% - 5rem);
-    padding: 1rem 1rem;
-}
-
-.popup-body-main {
-    height: calc(100% - 4rem);
+    height: calc(100% - 7.5rem);
+    padding: 0 1rem;
+    margin-top: 0.5rem;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -64,12 +61,14 @@ tr.tr-departure, tr.tr-arrival {
     font-weight: 700;
 }
 
-.popup-body-footer {
-    text-align: center;
-    margin-top: 1rem;
+.popup-footer-city-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
 }
 
-.popup-footer-link-button {
+.popup-footer-link-button-city-list {
     line-height: 2.5rem;
     padding: 0 1rem;
     margin: 0 0.5rem;
@@ -83,7 +82,7 @@ tr.tr-departure, tr.tr-arrival {
     text-decoration: none;
 }
 
-.popup-footer-button {
+.popup-footer-button-city-list {
     line-height: 2.5rem;
     padding: 0 1rem;
     margin: 0 0.5rem;
@@ -98,19 +97,20 @@ tr.tr-departure, tr.tr-arrival {
     text-decoration: none;
 }
 
-.popup-footer-button:hover, .popup-footer-link-button:hover {
+.popup-footer-button-city-list:hover, 
+.popup-footer-link-button-city-list:hover {
     opacity: 0.8;
 }
 
 /* table */
 
-table {
+table.city-list {
     width: 100%;
     border-collapse: collapse;
     border: 1px solid #d7dce1;
 }
 
-th {
+th.city-list {
     height: 6rem;
     line-height: 1.6rem;
     background: #e6e9ed;
@@ -122,16 +122,16 @@ th {
     color: #777a7e;
 }
 
-tr {
+tr.city-list {
     line-height: 5rem;
     background-color: white;
 }
 
-tr:hover {
+tr.city-list:hover {
     background-color: #dee9f4;
 }
 
-td {
+td.city-list {
     padding: 0 1rem;
     border: 1px solid #d7dce1;
     text-align: center;
