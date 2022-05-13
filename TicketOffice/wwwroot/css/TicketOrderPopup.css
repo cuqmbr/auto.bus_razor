@@ -97,7 +97,7 @@ div.ticket-validation-error {
     color: #777a7e;
     text-align: center;
     font-size: 0.9rem;
-    font-weight: 700;
+    font-weight:700;
     line-height: 1rem;;
     margin: 0.25rem 0 0 0;
 }
@@ -156,7 +156,7 @@ div.ticket-info-line-right-block {
     margin: 0 0.5rem;
     display: inline-block;
     color: #1d4965;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 1rem;
     background: linear-gradient(0deg,#79b6db,#b3dbf2);
     border: none;

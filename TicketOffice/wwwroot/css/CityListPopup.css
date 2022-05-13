@@ -82,22 +82,6 @@ tr.tr-departure, tr.tr-arrival {
     text-decoration: none;
 }
 
-.popup-footer-button-city-list {
-    line-height: 2.5rem;
-    padding: 0 1rem;
-    margin: 0 0.5rem;
-    display: inline-block;
-    color: #1d4965;
-    font-weight: 700;
-    font-size: 1rem;
-    background: linear-gradient(0deg,#79b6db,#b3dbf2);
-    border: none;
-    border-radius: .3rem;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.popup-footer-button-city-list:hover, 
 .popup-footer-link-button-city-list:hover {
     opacity: 0.8;
 }

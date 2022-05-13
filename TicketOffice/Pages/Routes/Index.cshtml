@@ -190,7 +190,7 @@
     
 </div>
 
-@if (Model.Routes != null)
+@if (Model.Routes is not null)
 {
     foreach (var route in Model.Routes)
     {
@@ -269,17 +269,11 @@
                     </table>
                 </div>
                 <div class="popup-footer-city-list">
-                    <a class="popup-footer-button-city-list" onclick="document.getElementById('popup-city-list-@route.Id').style.display = 'none'">Закрити</a>
+                    <a class="popup-footer-link-button-city-list" onclick="document.getElementById('popup-city-list-@route.Id').style.display = 'none'">Закрити</a>
                 </div>
             </div>
         </div>
-    }
-}
-
-@if (Model.Routes != null)
-{
-    foreach (var route in Model.Routes)
-    {
+        
         <div class="popup-container-ticket-order" id="popup-ticket-@route.Id" style='display:@(Model.Ticket is not null && Model.Ticket.RouteId == route.Id ? "inherit" : "none")'>
             <div class="ticket">
                 <div class="ticket-header">

@@ -92,7 +92,7 @@ body {
     display: inline-block;
     color: #1d4965;
     font-size: 0.8rem;
-    font-weight: 700;
+    font-weight: 50 0;
     background: linear-gradient(0deg,#79b6db,#b3dbf2);
     border: none;
     border-radius: .3rem;
@@ -111,7 +111,7 @@ body {
     padding: 0 1rem;
     display: inline-block;
     color: #1d4965;
-    font-weight: 700;
+    font-weight: 500;
     background: linear-gradient(0deg,#79b6db,#b3dbf2);
     border: none;
     border-radius: .3rem;
