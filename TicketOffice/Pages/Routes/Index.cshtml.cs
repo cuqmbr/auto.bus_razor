@@ -68,7 +68,7 @@ public class IndexModel : PageModel
     {
         OnGet();
 
-        if (SortString == "increasingNumber dependencies")
+        if (SortString == "increasingNumber")
         {
             Routes.Sort((x, y) => Math.Clamp(x.Number - y.Number, -1, 1));
         }
