@@ -23,7 +23,7 @@ public class IndexModel : PageModel
 
     private readonly TicketOfficeContext _context;
 
-    public IndexModel(TicketOfficeContext context, ILogger<IndexModel> logger)
+    public IndexModel(TicketOfficeContext context)
     {
         _context = context;
     }
@@ -193,6 +193,14 @@ public class IndexModel : PageModel
         if (place == 0)
         {
             validationError = "Поле має бути заповненим";
+            return false;
+        }
+
+        Ticket? ticket = _context.Ticket.FirstOrDefault(t => t.RouteId == Ticket.RouteId && t.PassengerPlace == Ticket.PassengerPlace);
+
+        if (ticket is not null)
+        {
+            validationError = "Місце вже зайняте";
             return false;
         }
         
