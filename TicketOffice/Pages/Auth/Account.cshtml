@@ -37,17 +37,17 @@
                             <div class="ticket-info-line date">
                                 <span>Дата відправлення:</span>
                                 <span>
-                                    @ticket.Route.Cities.First().DepartureTime?.ToString("f").Split(",")[0].ToLower(), 
-                                    @ticket.Route.Cities.First().DepartureTime?.ToString("dd.MM.yyyy"), 
-                                    @ticket.Route.Cities.First().DepartureTime?.ToString("HH:mm")
+                                    @ticket.Cities.First().DepartureTime?.ToString("f").Split(",")[0].ToLower(), 
+                                    @ticket.Cities.First().DepartureTime?.ToString("dd.MM.yyyy"), 
+                                    @ticket.Cities.First().DepartureTime?.ToString("HH:mm")
                                 </span>
                             </div>
                             <div class="ticket-info-line date">
                                 <span>Дата прибуття:</span>
                                 <span>
-                                    @ticket.Route.Cities.Last().ArrivalTime?.ToString("f").Split(",")[0].ToLower(), 
-                                    @ticket.Route.Cities.Last().ArrivalTime?.ToString("dd.MM.yyyy"), 
-                                    @ticket.Route.Cities.Last().ArrivalTime?.ToString("HH:mm")
+                                    @ticket.Cities.Last().ArrivalTime?.ToString("f").Split(",")[0].ToLower(), 
+                                    @ticket.Cities.Last().ArrivalTime?.ToString("dd.MM.yyyy"), 
+                                    @ticket.Cities.Last().ArrivalTime?.ToString("HH:mm")
                                 </span>
                             </div>
                         </div>
@@ -62,11 +62,11 @@
     }
 </div>
 
-<div class="divider"></div>
-
-<div class="section">
-    <div class="section-header">Керування аккаунтом</div>
-</div>
+@* <div class="divider"></div> *@
+@* *@
+@* <div class="section"> *@
+@*     <div class="section-header">Керування аккаунтом</div> *@
+@* </div> *@
 
 @* Popup windows *@
 
@@ -103,30 +103,30 @@
                                 Відправлення
                             </td>
                             <td class="td-route city-list">
-                                @ticket.Route.Cities.First().Name
+                                @ticket.Cities.First().Name
                             </td>
                             <td class="td-route city-list">
                                 -
                             </td>
                             <td class="td-route city-list">
-                                @ticket.Route.Cities.First().DepartureTime?.ToString("HH:mm")
+                                @ticket.Cities.First().DepartureTime?.ToString("HH:mm")
                             </td>
                         </tr>
                         
-                        @for (int i = 1; i < ticket.Route.Cities.Count - 1; i++)
+                        @for (int i = 1; i < ticket.Cities.Count - 1; i++)
                         {
                             <tr class="tr-intermediate city-list">
                                 <td class="td-route city-list">
                                     Проміжна станція
                                 </td>
                                 <td class="td-route city-list">
-                                    @ticket.Route.Cities.ToList()[i].Name
+                                    @ticket.Cities.ToList()[i].Name
                                 </td>
                                 <td class="td-route city-list">
-                                    @ticket.Route.Cities.ToList()[i].ArrivalTime?.ToString("HH:mm")
+                                    @ticket.Cities.ToList()[i].ArrivalTime?.ToString("HH:mm")
                                 </td>
                                 <td class="td-route city-list">
-                                    @ticket.Route.Cities.ToList()[i].DepartureTime?.ToString("HH:mm")
+                                    @ticket.Cities.ToList()[i].DepartureTime?.ToString("HH:mm")
                                 </td>
                             </tr>
                         }
@@ -136,10 +136,10 @@
                                 Прибуття
                             </td>
                             <td class="td-route city-list">
-                                @ticket.Route.Cities.Last().Name
+                                @ticket.Cities.Last().Name
                             </td>
                             <td class="td-route city-list">
-                                @ticket.Route.Cities.Last().ArrivalTime?.ToString("HH:mm")
+                                @ticket.Cities.Last().ArrivalTime?.ToString("HH:mm")
                             </td>
                             <td class="td-route city-list">
                                 -

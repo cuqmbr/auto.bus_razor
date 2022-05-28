@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TicketOffice.Models;
 
-public class City
+public class RouteCity
 {
     [Key]
     public int Id { get; set; }
@@ -21,7 +21,6 @@ public class City
     [Display(Name = "Дата прибуття")]
     [DataType(DataType.Date)]
     public DateTime? DepartureTime { get; set; }
-
     
     [ForeignKey("Route")]
     public int RouteId { get; set; }

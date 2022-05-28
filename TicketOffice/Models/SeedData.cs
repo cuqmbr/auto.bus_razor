@@ -16,7 +16,7 @@ public class SeedData
             throw new ArgumentNullException("Null TicketOfficeContext");
         }
 
-        if (context.User.Any() | context.Route.Any() | context.City.Any() | context.Ticket.Any())
+        if (context.User.Any() | context.Route.Any() | context.RouteCity.Any() | context.Ticket.Any())
         {
             return; // Data has been seeded
         }
@@ -44,21 +44,21 @@ public class SeedData
             new Route {
                 Number = 2,
                 Capacity = 30,
-                Cities = new City[]
+                Cities = new RouteCity[]
                 {
-                    new City
+                    new RouteCity
                     {
                         Name = "Кремінна",
                         ArrivalTime = new DateTime(2022, 03, 28, 8, 15, 0),
                         DepartureTime = new DateTime(2022, 03, 28, 8, 35, 0),
                     },
-                    new City
+                    new RouteCity
                     {
                         Name = "Рубіжне",
                         ArrivalTime = new DateTime(2022, 03, 28, 9, 5, 0),
                         DepartureTime = new DateTime(2022, 03, 28, 9, 25, 0),
                     },
-                    new City
+                    new RouteCity
                     {
                         Name = "Сєвєродонецьк",
                         ArrivalTime = new DateTime(2022, 03, 28, 9, 55, 0)
@@ -69,21 +69,21 @@ public class SeedData
             {
                 Number = 1,
                 Capacity = 25,
-                Cities = new City[]
+                Cities = new RouteCity[]
                 {
-                    new City
+                    new RouteCity
                     {
                         Name = "Сєвєродонецьк",
                         ArrivalTime = new DateTime(2022, 03, 28, 15, 55, 0),
                         DepartureTime = new DateTime(2022, 03, 28, 16, 15, 0),
                     },
-                    new City
+                    new RouteCity
                     {
                         Name = "Рубіжне",
                         ArrivalTime = new DateTime(2022, 03, 28, 16, 45, 0),
                         DepartureTime = new DateTime(2022, 03, 28, 17, 5, 0),
                     },
-                    new City
+                    new RouteCity
                     {
                         Name = "Кремінна",
                         ArrivalTime = new DateTime(2022, 03, 28, 17, 40, 0)
@@ -94,27 +94,27 @@ public class SeedData
             {
                 Number = 3,
                 Capacity = 30,
-                Cities = new City[]
+                Cities = new RouteCity[]
                 {
-                    new City
+                    new RouteCity
                     {
                         Name = "Кремінна",
                         ArrivalTime = new DateTime(2022, 03, 28, 9, 20, 0),
                         DepartureTime = new DateTime(2022, 03, 28, 8, 40, 0),
                     },
-                    new City
+                    new RouteCity
                     {
                         Name = "Житлівка",
                         ArrivalTime = new DateTime(2022, 03, 28, 10, 0, 0),
                         DepartureTime = new DateTime(2022, 03, 28, 10, 15, 0),
                     },
-                    new City
+                    new RouteCity
                     {
                         Name = "Рубіжне",
                         ArrivalTime = new DateTime(2022, 03, 28, 11, 5, 0),
                         DepartureTime = new DateTime(2022, 03, 28, 11, 20, 0),
                     },
-                    new City
+                    new RouteCity
                     {
                         Name = "Сєвєродонецьк",
                         ArrivalTime = new DateTime(2022, 03, 28, 11, 55, 0)

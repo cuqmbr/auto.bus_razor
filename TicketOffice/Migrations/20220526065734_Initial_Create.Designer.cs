@@ -11,15 +11,32 @@ using TicketOffice.Data;
 namespace TicketOffice.Migrations
 {
     [DbContext(typeof(TicketOfficeContext))]
-    [Migration("20220404151700_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220526065734_Initial_Create")]
+    partial class Initial_Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.3");
 
-            modelBuilder.Entity("TicketOffice.Models.City", b =>
+            modelBuilder.Entity("TicketOffice.Models.Route", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Route");
+                });
+
+            modelBuilder.Entity("TicketOffice.Models.RouteCity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,24 +60,7 @@ namespace TicketOffice.Migrations
 
                     b.HasIndex("RouteId");
 
-                    b.ToTable("City");
-                });
-
-            modelBuilder.Entity("TicketOffice.Models.Route", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Capacity")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Number")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Route");
+                    b.ToTable("RouteCity");
                 });
 
             modelBuilder.Entity("TicketOffice.Models.Ticket", b =>
@@ -93,6 +93,33 @@ namespace TicketOffice.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Ticket");
+                });
+
+            modelBuilder.Entity("TicketOffice.Models.TicketCity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("ArrivalTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("DepartureTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TicketId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TicketId");
+
+                    b.ToTable("TicketCity");
                 });
 
             modelBuilder.Entity("TicketOffice.Models.User", b =>
@@ -131,7 +158,7 @@ namespace TicketOffice.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("TicketOffice.Models.City", b =>
+            modelBuilder.Entity("TicketOffice.Models.RouteCity", b =>
                 {
                     b.HasOne("TicketOffice.Models.Route", "Route")
                         .WithMany("Cities")
@@ -161,11 +188,27 @@ namespace TicketOffice.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("TicketOffice.Models.TicketCity", b =>
+                {
+                    b.HasOne("TicketOffice.Models.Ticket", "Ticket")
+                        .WithMany("Cities")
+                        .HasForeignKey("TicketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ticket");
+                });
+
             modelBuilder.Entity("TicketOffice.Models.Route", b =>
                 {
                     b.Navigation("Cities");
 
                     b.Navigation("Tickets");
+                });
+
+            modelBuilder.Entity("TicketOffice.Models.Ticket", b =>
+                {
+                    b.Navigation("Cities");
                 });
 
             modelBuilder.Entity("TicketOffice.Models.User", b =>

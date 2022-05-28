@@ -164,7 +164,7 @@
                             @($"{duration?.TotalHours.ToString().Split(",")[0]}:{duration?.Minutes}")
                         </td>
                         <td class="capacity">
-                            @(route.Capacity - route.Tickets.Count)
+                            @Model.GetRemainingCapacity(route)
                         </td>
                         <td class="action">
                             <a class="link-btn-choose" onclick="document.getElementById('popup-ticket-@route.Id').style.display = 'inherit'">Обрати</a>
@@ -311,7 +311,7 @@
                                     <option selected disabled value="">Місце</option>
                                     @for (int i = 1; i <= route.Capacity; i++)
                                     {
-                                        if (route.Tickets.Any(t => t.PassengerPlace == i))
+                                        if (route.Tickets.Any(t => @Model.GetCitiesNames(t.Cities.ToList()).Intersect(@Model.GetCitiesNames(route.Cities.ToList())).ToList().Any() && t.PassengerPlace == i))
                                         {
                                             <option value="@i" disabled>@i - Місце зайняте</option>
                                         }

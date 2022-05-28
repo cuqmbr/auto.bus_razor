@@ -18,8 +18,9 @@ namespace TicketOffice.Data
         public DbSet<TicketOffice.Models.User> User { get; set; }
 
         public DbSet<TicketOffice.Models.Route> Route { get; set; }
-
-        public DbSet<TicketOffice.Models.City> City { get; set; }
+        
+        public DbSet<TicketOffice.Models.RouteCity> RouteCity { get; set; }
+        public DbSet<TicketOffice.Models.TicketCity> TicketCity { get; set; }
 
         public DbSet<TicketOffice.Models.Ticket> Ticket { get; set; }
     }

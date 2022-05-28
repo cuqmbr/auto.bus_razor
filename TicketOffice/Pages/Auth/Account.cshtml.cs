@@ -12,15 +12,13 @@ public class IndexModel : PageModel
     [BindProperty(SupportsGet = true)] public int ReturnTicketId { get; set; }
     
     private readonly TicketOfficeContext _context;
-    private readonly ILogger<IndexModel> _logger;
-    
+
     public IndexModel(TicketOfficeContext context, ILogger<IndexModel> logger)
     {
         _context = context;
-        _logger = logger;
     }
 
-    public IActionResult OnGet()
+    public ActionResult OnGet()
     {
         if (!ValidateSession())
             return RedirectToPage("/Auth/Login");
@@ -28,18 +26,16 @@ public class IndexModel : PageModel
         Tickets = _context.Ticket
                 .Where(t => t.UserId == HttpContext.Session.GetInt32("UserId"))
                 .Include(t => t.Route)
-                .Include(t => t.Route.Cities)
+                .Include(t => t.Cities)
                 .ToList();
 
         return Page();
     }
 
-    public IActionResult OnGetReturnTicket()
+    public ActionResult OnGetReturnTicket()
     {
         OnGet();
-        
-        _logger.Log(LogLevel.Information, $"\n\n\n\n {ReturnTicketId} \n\n\n\n");
-        
+
         Ticket returnTicket = _context.Ticket.Find(ReturnTicketId);
 
         if (returnTicket is not null)

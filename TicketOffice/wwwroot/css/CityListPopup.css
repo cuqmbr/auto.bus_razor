@@ -11,7 +11,8 @@
 
 .popup-city-list {
     width: 40rem;
-    height: 30rem;
+    height: fit-content;
+    max-height: 30rem;
     background: #eaeef1;
     position: fixed;
     top: calc(50% - 15rem);

@@ -19,8 +19,10 @@ public class Ticket
     [Required(ErrorMessage = "Поле має бути заповненим")]
     [Display(Name = "Номер місця пасажира")]
     public int PassengerPlace { get; set; }
-    
-    
+
+    [Required]
+    public ICollection<TicketCity> Cities { get; set; }
+
     [ForeignKey("User")]
     public int UserId { get; set; }
     public User User { get; set; }
