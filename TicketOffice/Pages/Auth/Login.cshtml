@@ -14,13 +14,13 @@
             Авторизація
         </div>
         
-        <input class="field" type="text" placeholder="E-mail" autocomplete="off" asp-for="User.Email"/>
+        <input class="field" type="text" placeholder="E-mail" autocomplete="off" asp-for="User!.Email"/>
         <div class="validation-error">
             <span>@Model.EmailValidationError</span>
         </div>
         <br>
 
-        <input class="field" type="password" placeholder="Пароль" autocomplete="off" asp-for="User.Password"/>
+        <input class="field" type="password" placeholder="Пароль" autocomplete="off" asp-for="User!.Password"/>
         <div class="validation-error">
             <span>@Model.PasswordValidationError</span>
         </div>

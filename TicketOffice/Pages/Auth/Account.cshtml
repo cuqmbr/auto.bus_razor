@@ -1,6 +1,6 @@
 @page
 @using System.Globalization
-@model TicketOffice.Pages.Account.IndexModel
+@model TicketOffice.Pages.Auth.AccountModel
 @{
     Layout = "~/Pages/Shared/_Layout.cshtml";
     ViewData["Title"] = "Аккаунт";
@@ -61,14 +61,6 @@
         </div>
     }
 </div>
-
-@* <div class="divider"></div> *@
-@* *@
-@* <div class="section"> *@
-@*     <div class="section-header">Керування аккаунтом</div> *@
-@* </div> *@
-
-@* Popup windows *@
 
 @if (Model.Tickets is not {Count: 0})
 {

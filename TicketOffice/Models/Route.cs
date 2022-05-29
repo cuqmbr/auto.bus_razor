@@ -1,7 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Components;
-using Microsoft.EntityFrameworkCore;
 
 namespace TicketOffice.Models;
 
@@ -21,7 +18,7 @@ public class Route
     public int Capacity { get; set; }
     
     [Required]
-    public ICollection<RouteCity> Cities { get; set; }
-    
+    public ICollection<RouteCity> Cities { get; set; } = null!;
+
     public ICollection<Ticket>? Tickets { get; set; }
 }

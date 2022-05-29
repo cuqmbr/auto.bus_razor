@@ -10,13 +10,13 @@
 }
 
 .popup-city-list {
-    width: 40rem;
+    width: 42rem;
     height: fit-content;
     max-height: 30rem;
     background: #eaeef1;
     position: fixed;
     top: calc(50% - 15rem);
-    left: calc(50% - 20rem);
+    left: calc(50% - 21rem);
     border-radius: 0.5rem;
     box-shadow: 0 10px 15px 5px #6c6e6f;
 }
@@ -34,11 +34,10 @@
 
 .popup-body-city-list {
     width: calc(100% - 2rem);
-    height: calc(100% - 7.5rem);
+    height: calc(30rem - 7.5rem);
     padding: 0 1rem;
     margin-top: 0.5rem;
     overflow-y: auto;
-    overflow-x: hidden;
 }
 
 tr.tr-intermediate {

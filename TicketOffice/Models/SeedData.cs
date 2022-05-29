@@ -13,12 +13,13 @@ public class SeedData
 
         if (context == null)
         {
-            throw new ArgumentNullException("Null TicketOfficeContext");
+            throw new ArgumentNullException(nameof(serviceProvider));
         }
 
-        if (context.User.Any() | context.Route.Any() | context.RouteCity.Any() | context.Ticket.Any())
+        if (context.User.Any() | context.Route.Any() |
+            context.RouteCity.Any() | context.Ticket.Any()) // Data has been seeded
         {
-            return; // Data has been seeded
+            return;
         }
 
         context.Database.EnsureCreated();
@@ -29,95 +30,360 @@ public class SeedData
             {
                 Email = "danylo.nazarko@nure.ua",
                 Password = "*Hashed Password*",
-                IsManager = false,
-            },
-            new User
-            {
-                Email = "ruslan.shanin@nure.ua",
-                Password = "*Hashed Password*",
-                IsManager = false
             }
         });
         
         context.Route.AddRange(new Route[]
         {
-            new Route {
-                Number = 2,
+            new Route()
+            {
+                Number = 027,
                 Capacity = 30,
-                Cities = new RouteCity[]
+                Cities = new List<RouteCity>()
                 {
                     new RouteCity
                     {
+                        Name = "Сватове",
+                        
+                        ArrivalTime = null,
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            6,
+                            30,
+                            0)
+                    },
+                    new RouteCity
+                    {
+                        Name = "Красноріченське",
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            7,
+                            10,
+                            0),
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            7,
+                            20,
+                            0)
+                    },
+                    new RouteCity
+                    {
                         Name = "Кремінна",
-                        ArrivalTime = new DateTime(2022, 03, 28, 8, 15, 0),
-                        DepartureTime = new DateTime(2022, 03, 28, 8, 35, 0),
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            7,
+                            50,
+                            0),
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            8,
+                            0,
+                            0)
                     },
                     new RouteCity
                     {
                         Name = "Рубіжне",
-                        ArrivalTime = new DateTime(2022, 03, 28, 9, 5, 0),
-                        DepartureTime = new DateTime(2022, 03, 28, 9, 25, 0),
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            8,
+                            30,
+                            0),
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            8,
+                            40,
+                            0)
                     },
                     new RouteCity
                     {
                         Name = "Сєвєродонецьк",
-                        ArrivalTime = new DateTime(2022, 03, 28, 9, 55, 0)
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            9,
+                            10,
+                            0),
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            9,
+                            20,
+                            0)
+                    },
+                    new RouteCity
+                    {
+                        Name = "Лисичанськ",
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            9,
+                            50,
+                            0),
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            12,
+                            0,
+                            0),
+                    },
+                    new RouteCity
+                    {
+                        Name = "Сєвєродонецьк",
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            12,
+                            30,
+                            0),
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            12,
+                            40,
+                            0)
+                    },
+                    new RouteCity
+                    {
+                        Name = "Рубіжне",
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            13,
+                            10,
+                            0),
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            13,
+                            20,
+                            0)
+                    },
+                    new RouteCity
+                    {
+                        Name = "Кремінна",
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            13,
+                            50,
+                            0),
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            14,
+                            0,
+                            0)
+                    },
+                    new RouteCity
+                    {
+                        Name = "Красноріченське",
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            14,
+                            30,
+                            0),
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            14,
+                            40,
+                            0)
+                    },
+                    new RouteCity
+                    {
+                        Name = "Сватове",
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            15,
+                            20,
+                            0),
+                
+                        DepartureTime = null
                     }
                 }
             },
-            new Route
+            new Route()
             {
-                Number = 1,
+                Number = 013,
                 Capacity = 25,
-                Cities = new RouteCity[]
-                {
-                    new RouteCity
-                    {
-                        Name = "Сєвєродонецьк",
-                        ArrivalTime = new DateTime(2022, 03, 28, 15, 55, 0),
-                        DepartureTime = new DateTime(2022, 03, 28, 16, 15, 0),
-                    },
-                    new RouteCity
-                    {
-                        Name = "Рубіжне",
-                        ArrivalTime = new DateTime(2022, 03, 28, 16, 45, 0),
-                        DepartureTime = new DateTime(2022, 03, 28, 17, 5, 0),
-                    },
-                    new RouteCity
-                    {
-                        Name = "Кремінна",
-                        ArrivalTime = new DateTime(2022, 03, 28, 17, 40, 0)
-                    }
-                }
-            },
-            new Route
-            {
-                Number = 3,
-                Capacity = 30,
-                Cities = new RouteCity[]
+                Cities = new List<RouteCity>()
                 {
                     new RouteCity
                     {
                         Name = "Кремінна",
-                        ArrivalTime = new DateTime(2022, 03, 28, 9, 20, 0),
-                        DepartureTime = new DateTime(2022, 03, 28, 8, 40, 0),
-                    },
-                    new RouteCity
-                    {
-                        Name = "Житлівка",
-                        ArrivalTime = new DateTime(2022, 03, 28, 10, 0, 0),
-                        DepartureTime = new DateTime(2022, 03, 28, 10, 15, 0),
+                        
+                        ArrivalTime = null,
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            7,
+                            0,
+                            0)
                     },
                     new RouteCity
                     {
                         Name = "Рубіжне",
-                        ArrivalTime = new DateTime(2022, 03, 28, 11, 5, 0),
-                        DepartureTime = new DateTime(2022, 03, 28, 11, 20, 0),
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            7,
+                            30,
+                            0),
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            7,
+                            40,
+                            0)
                     },
                     new RouteCity
                     {
                         Name = "Сєвєродонецьк",
-                        ArrivalTime = new DateTime(2022, 03, 28, 11, 55, 0)
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            8,
+                            10,
+                            0),
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            8,
+                            20,
+                            0)
+                    },
+                    new RouteCity
+                    {
+                        Name = "Станиця Луганська",
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            9,
+                            20,
+                            0),
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            11,
+                            20,
+                            0)
+                    },
+                    new RouteCity
+                    {
+                        Name = "Сєвєродонецьк",
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            12,
+                            20,
+                            0),
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            12,
+                            30,
+                            0)
+                    },
+                    new RouteCity
+                    {
+                        Name = "Рубіжне",
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            13,
+                            0,
+                            0),
+                
+                        DepartureTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            13,
+                            10,
+                            0)
+                    },
+                    new RouteCity
+                    {
+                        Name = "Кремінна",
+                        
+                        ArrivalTime = new DateTime(
+                            DateTime.Today.Year, 
+                            DateTime.Today.Month,
+                            DateTime.Today.Day, 
+                            13,
+                            40,
+                            0),
+                
+                        DepartureTime = null
                     }
                 }
             }

@@ -9,71 +9,104 @@ namespace TicketOffice.Pages.Routes;
 
 public class IndexModel : PageModel
 {
-    [BindProperty] public List<Route> Routes { get; set; }
-    [BindProperty] public Ticket Ticket { get; set; }
+    // Error massage displaying when passenger's last name validation failed.
+    public string? PassengerLastNameValidationError;
+    
+    // Error massage displaying when passenger's first name validation failed.
+    public string? PassengerFirstNameValidationError;
+    
+    // Error massage displaying when passenger's place validation failed.
+    public string? PassengerPlaceValidationError;
 
-    public string PassengerLastNameValidationError;
-    public string PassengerFirstNameValidationError;
-    public string PassengerPlaceValidationError;
-
-    [BindProperty(SupportsGet = true)] public string From { get; set; }
-    [BindProperty(SupportsGet = true)] public string To { get; set; }
-
-    [BindProperty(SupportsGet = true)] public DateTime Date { get; set; } = new DateTime(2022, 03, 28, 0, 0, 0).Date;
-
-    [BindProperty(SupportsGet = true)] public string SortString { get; set; }
-
-    private readonly TicketOfficeContext _context;
+    private readonly TicketOfficeContext context;
 
     public IndexModel(TicketOfficeContext context)
     {
-        _context = context;
+        this.context = context;
     }
 
+    // Route list representing search results.
+    [BindProperty] 
+    public List<Route>? Routes { get; set; }
+
+    // Object representing ticket which user wants to buy.
+    [BindProperty] 
+    public Ticket? Ticket { get; set; }
+
+    // Search condition: departure city.
+    [BindProperty(SupportsGet = true)]
+    public string? From { get; set; }
+
+    // Search condition: arrival city.
+    [BindProperty(SupportsGet = true)]
+    public string? To { get; set; }
+
+    // Search condition: departure date.
+    [BindProperty(SupportsGet = true)]
+    public DateTime? Date { get; set; } = DateTime.Today;
+    
+    // Sort condition: determines in which order tickets will be displayed.
+    // in the search results table
+    [BindProperty(SupportsGet = true)]
+    public string? SortString { get; set; }
+
+    // Called when GET request is sent to the page. Retrieves routes based on
+    // search conditions and sorts them.
     public ActionResult OnGet()
     {
         GetRoutes();
         return Page();
     }
 
+    // Called when POST request is sent to the page (when user tries to buy a
+    // ticket). Validates input, creates new ticket in the database and
+    // redirects to "Account" page, where all bought tickets are shown.
     public ActionResult OnPost()
     {
-        if (!PassengerNameValidation(Ticket.PassengerLastName,
+        GetRoutes();
+        
+        if (!PassengerNameValidation(Ticket!.PassengerLastName,
                 out PassengerLastNameValidationError) |
             !PassengerNameValidation(Ticket.PassengerFirstName,
                 out PassengerFirstNameValidationError) |
             !PassengerPlaceValidation(Ticket.PassengerPlace,
                 out PassengerPlaceValidationError))
+        {
             return OnGet();
+        }
 
-        GetRoutes();
         CopyCitiesToTicket();
-        _context.Ticket.Add(Ticket);
         RevertChangesToRouteCities();
-        _context.SaveChanges();
+        
+        context.Ticket.Add(Ticket);
+        context.SaveChanges();
        
         return RedirectToPage("/Auth/Account");
     }
 
+    // Sorts routes by routes' number.
     public void OnGetSortByNumber()
     {
         OnGet();
 
         if (SortString == "increasingNumber")
         {
-            Routes.Sort((x, y) => Math.Clamp(x.Number - y.Number, -1, 1));
+            Routes!.Sort((x, y) =>
+                Math.Clamp(x.Number - y.Number, -1, 1));
         }
         else
         {
-            Routes.Sort((x, y) => Math.Clamp(y.Number - x.Number, -1, 1));
+            Routes!.Sort((x, y) =>
+                Math.Clamp(y.Number - x.Number, -1, 1));
         }
     }
 
+    // Sorts routes by routes' departure time .
     public void OnGetSortByDeparture()
     {
         OnGet();
 
-        Routes.Sort((x, y) =>
+        Routes!.Sort((x, y) =>
         {
             TimeSpan? totalDuration;
 
@@ -88,16 +121,17 @@ public class IndexModel : PageModel
                                 x.Cities.First().DepartureTime;
             }
 
-            return Math.Clamp((int) totalDuration.Value.TotalMilliseconds, -1,
-                1);
+            return 
+                Math.Clamp((int) totalDuration!.Value.TotalMilliseconds, -1, 1);
         });
     }
 
+    // Sorts routes by routes' arrival time.
     public void OnGetSortByArrival()
     {
         OnGet();
 
-        Routes.Sort((x, y) =>
+        Routes!.Sort((x, y) =>
         {
             TimeSpan? totalDuration;
 
@@ -112,21 +146,23 @@ public class IndexModel : PageModel
                                 x.Cities.Last().ArrivalTime;
             }
 
-            return Math.Clamp((int) totalDuration.Value.TotalMilliseconds, -1,
-                1);
+            return 
+                Math.Clamp((int) totalDuration!.Value.TotalMilliseconds, -1, 1);
         });
     }
 
+    // Sorts routes by routes' duration.
     public void OnGetSortByDuration()
     {
         OnGet();
 
-        Routes.Sort((x, y) =>
+        Routes!.Sort((x, y) =>
         {
             TimeSpan? xDuration = x.Cities.Last().ArrivalTime -
                                   x.Cities.First().DepartureTime;
             TimeSpan? yDuration = y.Cities.Last().ArrivalTime -
                                   y.Cities.First().DepartureTime;
+            
             TimeSpan? totalDuration;
 
             if (SortString == "increasingDuration")
@@ -138,113 +174,185 @@ public class IndexModel : PageModel
                 totalDuration = yDuration - xDuration;
             }
 
-            return Math.Clamp((int) totalDuration.Value.TotalMilliseconds, -1,
-                1);
+            return 
+                Math.Clamp((int) totalDuration!.Value.TotalMilliseconds, -1, 1);
         });
     }
 
-    public List<string> GetCitiesNames(List<RouteCity> Cities)
-    {
-        List<string> citiesNames = new List<string>();
-
-        foreach (var city in Cities)
-        {
-            citiesNames.Add(city.Name);
-        }
-
-        return citiesNames;
-    }
-    
-    public List<string> GetCitiesNames(List<TicketCity> Cities)
-    {
-        List<string> citiesNames = new List<string>();
-
-        foreach (var city in Cities)
-        {
-            citiesNames.Add(city.Name);
-        }
-
-        return citiesNames;
-    }
-
+    // Returns remaining route's capacity depending on
+    // arrival and departure cities.
     public int GetRemainingCapacity(Route route)
     {
-        return route.Capacity - route.Tickets.Count(t => 
-            GetCitiesNames(t.Cities.ToList())
-                .Intersect(GetCitiesNames(route.Cities.ToList()))
-                .ToList().Any());
+        int remainingCapacity = route.Capacity;
+
+        foreach (var ticket in route.Tickets!)
+        {
+            List<DateTime?> intersection = GetCitiesDates(route.Cities.ToList())
+                .Intersect(GetCitiesDates(ticket.Cities.ToList()))
+                .ToList();
+
+            if (intersection.Count > 1)
+            {
+                remainingCapacity--;
+            }
+        }
+
+        return remainingCapacity;
     }
-        
+
+    // Returns false is place is available otherwise returns false
+    public bool IsTakenPlace(Route route, int place)
+    {
+        foreach (var ticket in route.Tickets!.Where(t => t.PassengerPlace == place))
+        {
+            List<DateTime?> intersection = GetCitiesDates(route.Cities.ToList())
+                .Intersect(GetCitiesDates(ticket.Cities.ToList()))
+                .ToList();
+
+            if (intersection.Count > 1)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    // Returns list of route cities' departure dates.
+    public List<DateTime?> GetCitiesDates(List<RouteCity> cities)
+    {
+        List<DateTime?> citiesDates = new List<DateTime?>();
+
+        foreach (var city in cities)
+        {
+            citiesDates.Add(city.DepartureTime);
+        }
+
+        return citiesDates;
+    }
+    
+    // Overload of the method above. Returns list of ticket cities' departure dates.
+    public List<DateTime?> GetCitiesDates(List<TicketCity> cities)
+    {
+        List<DateTime?> citiesDates = new List<DateTime?>();
+
+        foreach (var city in cities)
+        {
+            citiesDates.Add(city.DepartureTime);
+        }
+
+        return citiesDates;
+    }
 
     private void RetrieveAllRoutes()
     {
-        Routes = _context.Route
+        Routes = context.Route
             .Include(r => r.Cities)
             .Include(r => r.Tickets)
             .ToList();
 
-        // Add cities to tickets
+        // Add cities to tickets.
         for (int i = 0; i < Routes.Count; i++)
         {
-            for (int j = 0; j < Routes[i].Tickets.Count; j++)
+            for (int j = 0; j < Routes[i].Tickets!.Count; j++)
             {
-                Routes[i].Tickets.ToList()[j].Cities = _context.TicketCity
-                    .Where(tc => tc.Ticket == Routes[i].Tickets.ToList()[j])
+                Routes[i].Tickets!.ToList()[j].Cities = context.TicketCity
+                    .Where(tc => tc.Ticket == Routes[i].Tickets!.ToList()[j])
                     .ToList();
             }
         }
     }
 
-    private void FilterRoutesByFrom()
+    private void FilterRoutesByCities()
     {
+        if (From == To)
+        {
+            Routes!.RemoveAll(_ => true);
+            return;
+        }
+        
+        Routes!.RemoveAll(r =>
+            r.Cities.All(c => c.Name.ToLower() != From!.ToLower().Trim())
+            || r.Cities.All(c => c.Name.ToLower() != To!.ToLower().Trim()));
 
-        Routes.ForEach(r => r.Cities = r.Cities
-            .SkipWhile(c => c.Name.ToLower() != From.Trim().ToLower())
-            .ToList());
+        if (Routes.Count == 0)
+        {
+            return;
+        }
+        
+        RouteCity? fromCityFirst;
+        RouteCity? toCityFirst;
+        
+        RouteCity? fromCityLast;
+        RouteCity? toCityLast;
 
-        Routes.RemoveAll(r => r.Cities.Count < 2);
-    }
+        foreach (var route in Routes!)
+        {
+            fromCityLast = route.Cities.LastOrDefault(c =>
+                c.Name.ToLower() == From!.ToLower().Trim());
 
-    private void FilterRoutesByTo()
-    {
+            toCityLast = route.Cities.LastOrDefault(c =>
+                c.Name.ToLower() == To!.ToLower().Trim());
 
-        Routes.ForEach(r => r.Cities = r.Cities
-            .Reverse().SkipWhile(c => c.Name.ToLower() != To.Trim().ToLower())
-            .Reverse().ToList());
+            if (fromCityLast == null || toCityLast == null)
+            {
+                continue;
+            }
+            
+            if (fromCityLast.Id > toCityLast.Id)
+            {
+                fromCityFirst = route.Cities.First(c =>
+                    c.Name.ToLower() == From!.ToLower().Trim());
 
-        Routes.RemoveAll(r => r.Cities.Count < 2);
+                toCityFirst = route.Cities.First(c =>
+                    c.Name.ToLower() == To!.ToLower().Trim());
+                
+                route.Cities = route.Cities
+                    .SkipWhile(c => c != fromCityFirst)
+                    .TakeWhile(c => 
+                        route.Cities.ToList().IndexOf(c) !=
+                        route.Cities.ToList().IndexOf(toCityFirst) + 1)
+                    .ToList();
+            }
+            else
+            {
+                route.Cities = route.Cities
+                    .SkipWhile(c => c != fromCityLast)
+                    .TakeWhile(c =>
+                        route.Cities.ToList().IndexOf(c) !=
+                        route.Cities.ToList().IndexOf(toCityLast) + 1)
+                    .ToList();
+            }
+        }
     }
 
     private void FilterRoutesByDate()
     {
-        Routes.RemoveAll(r =>
-            r.Cities.First().DepartureTime.Value.DayOfYear != Date.DayOfYear);
+        if (Date < DateTime.Today)
+        {
+            Routes!.RemoveAll(_ => true);
+            return;
+        }
+        
+        Routes!.RemoveAll(r =>
+            r.Cities.First().DepartureTime!.Value.DayOfYear != Date?.DayOfYear);
     }
 
     private void GetRoutes()
     {
-        if (!string.IsNullOrWhiteSpace(From) || !string.IsNullOrWhiteSpace(To))
+        if (string.IsNullOrWhiteSpace(From) || string.IsNullOrWhiteSpace(To) ||
+            Date == null)
         {
-            RetrieveAllRoutes();
+            return;
         }
-
-        if (!string.IsNullOrWhiteSpace(From))
-        {
-            FilterRoutesByFrom();
-        }
-
-        if (!string.IsNullOrWhiteSpace(To))
-        {
-            FilterRoutesByTo();
-        }
-
-        if (!string.IsNullOrWhiteSpace(From) || !string.IsNullOrWhiteSpace(To))
-        {
-            FilterRoutesByDate();
-        }
+        
+        RetrieveAllRoutes();
+        FilterRoutesByCities();
+        FilterRoutesByDate();
     }
 
-    private bool PassengerNameValidation(string? name,
+    private bool PassengerNameValidation(
+        string? name,
         out string validationError)
     {
         if (String.IsNullOrEmpty(name))
@@ -257,7 +365,9 @@ public class IndexModel : PageModel
         return true;
     }
 
-    private bool PassengerPlaceValidation(int place, out string validationError)
+    private bool PassengerPlaceValidation(
+        int place,
+        out string validationError)
     {
         if (place == 0)
         {
@@ -265,11 +375,9 @@ public class IndexModel : PageModel
             return false;
         }
 
-        Ticket? ticket = _context.Ticket.FirstOrDefault(t =>
-            t.RouteId == Ticket.RouteId &&
-            t.PassengerPlace == Ticket.PassengerPlace);
-
-        if (ticket is not null)
+        if (IsTakenPlace(
+                Routes?.Where(r => r.Id == Ticket!.RouteId).ToList()[0]!,
+                Ticket!.PassengerPlace))
         {
             validationError = "Місце вже зайняте";
             return false;
@@ -281,9 +389,12 @@ public class IndexModel : PageModel
 
     private void CopyCitiesToTicket()
     {
-        List<RouteCity> RouteCities = Routes.Find(r => r.Id == Ticket.RouteId).Cities.ToList();
-        Ticket.Cities = new List<TicketCity>();
-        foreach (var city in RouteCities)
+        List<RouteCity> routeCities = 
+            Routes!.Find(r => r.Id == Ticket!.RouteId)!.Cities.ToList();
+        
+        Ticket!.Cities = new List<TicketCity>();
+        
+        foreach (var city in routeCities)
         {
             Ticket.Cities.Add(new TicketCity
             {
@@ -296,8 +407,9 @@ public class IndexModel : PageModel
 
     private void RevertChangesToRouteCities()
     {
-        _context.ChangeTracker.Entries()
-            .Where(e => e.Metadata.Name == "TicketOffice.Models.RouteCity")
+        context.ChangeTracker.Entries()
+            .Where(e =>
+                e.Metadata.Name == "TicketOffice.Models.RouteCity")
             .ToList().ForEach(e => e.State = EntityState.Unchanged);
     }
 }

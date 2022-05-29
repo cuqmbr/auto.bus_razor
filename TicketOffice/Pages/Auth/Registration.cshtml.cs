@@ -1,7 +1,6 @@
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using TicketOffice.Data;
 using TicketOffice.Models;
 
@@ -9,31 +8,47 @@ namespace TicketOffice.Pages.Auth;
 
 public class RegistrationModel : PageModel
 {
-    [BindProperty] public User User { get; set; }
+    // Error massage displaying when email validation failed.
+    public string EmailValidationError = null!;
     
-    public string EmailValidationError;
-    public string PasswordValidationError;
+    // Error massage displaying when password validation failed.
+    public string PasswordValidationError = null!;
 
-    private readonly TicketOfficeContext _context;
+    private readonly TicketOfficeContext context;
     
     public RegistrationModel(TicketOfficeContext context)
     {
-        _context = context;
+        this.context = context;
+    }
+    
+    [BindProperty]
+    public new User User { get; set; } = null!;
+
+    // Called when GET request is sent to the page. Validates the session and
+    // redirects to "Account" page if user already logged in.
+    public ActionResult OnGet()
+    {
+        if (ValidateSession())
+        {
+            return RedirectToPage("/Auth/Account");
+        }
+
+        return Page();
     }
 
-    public ActionResult OnGet() => ValidateSession() ? RedirectToPage("/Auth/Account") : Page();
-
+    // Called when POST request is sent to the page. Validates registration form,
+    // adds new user to the database and redirects to "Account" page if the
+    // validation succeed.
     public ActionResult OnPost()
     {
         if (ValidateForm())
         {
-            _context.User.Add(User);
-            _context.SaveChanges();
+            context.User.Add(User);
+            context.SaveChanges();
 
-            User = _context.User.FirstOrDefault(u => u.Email == User.Email);
+            User = context.User.FirstOrDefault(u => u.Email == User.Email)!;
             
             HttpContext.Session.SetInt32("UserId", User.Id);
-
             return RedirectToPage("/Auth/Account");
         }
             
@@ -42,7 +57,10 @@ public class RegistrationModel : PageModel
 
     private bool ValidateForm()
     {
-        return ValidateEmail(User.Email, out EmailValidationError) && ValidatePassword(User.Password, out PasswordValidationError);
+        return ValidateEmail(User.Email, out EmailValidationError) &&
+               ValidatePassword(User.Password,
+                   out PasswordValidationError);
+        
 
         bool ValidateEmail(string email, out string validationError)
         {
@@ -60,9 +78,10 @@ public class RegistrationModel : PageModel
                 return false;
             }
 
-            User user = _context.User.FirstOrDefault(u => u.Email == User.Email);
+            User? user = context.User
+                .FirstOrDefault(u => u.Email == User.Email);
 
-            if (user is not null)
+            if (user != null)
             {
                 validationError = "E-mail уже зареєстровано";
                 return false;
@@ -86,11 +105,14 @@ public class RegistrationModel : PageModel
                 return false;
             }
                 
-            Regex passwordRegex = new Regex(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
+            Regex passwordRegex = 
+                new Regex(@"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
                 
             if (!passwordRegex.IsMatch(passowrd))
             {
-                validationError = "Пароль має містити великі та малі латинські літери, цифри та спеціальні знаки (@, $, % та ін.)";
+                validationError = "Пароль має містити " +
+                                  "великі та малі латинські літери, " +
+                                  "цифри та спеціальні знаки (@, $, % та ін.)";
                 return false;
             }
         
@@ -99,5 +121,8 @@ public class RegistrationModel : PageModel
         }
     }
     
-    bool ValidateSession() => HttpContext.Session.GetInt32("UserId") is not null;
+    private bool ValidateSession()
+    {
+        return HttpContext.Session.GetInt32("UserId") != null;
+    }
 }

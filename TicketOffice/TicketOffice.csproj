@@ -32,6 +32,15 @@
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Pages\Auth\Registration\Index.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\Auth\Login\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Management\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Management\Routes\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Management\Routes\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Management\Routes\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Management\Routes\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Management\Tickets\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Management\Tickets\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Management\Tickets\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Management\Tickets\Index.cshtml" />
     </ItemGroup>
 
 </Project>

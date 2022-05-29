@@ -1,7 +1,6 @@
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using TicketOffice.Data;
 using TicketOffice.Models;
 
@@ -9,28 +8,45 @@ namespace TicketOffice.Pages.Auth;
 
 public class LoginModel : PageModel
 {
-    [BindProperty] public User? User { get; set; }
+    // Error massage displaying when email validation failed.
+    public string EmailValidationError = null!;
     
-    public string EmailValidationError;
-    public string PasswordValidationError;
+    // Error massage displaying when password validation failed.
+    public string PasswordValidationError = null!;
 
-    private readonly TicketOfficeContext _context;
+    private readonly TicketOfficeContext context;
     
     public LoginModel(TicketOfficeContext context)
     {
-        _context = context;
+        this.context = context;
+    }
+    
+    // Object representing a user who wants to login.
+    [BindProperty] 
+    public new User? User { get; set; }
+
+    // Called when GET request is sent to the page. Validates the session and
+    // redirects to "Account" page if user already logged in.
+    public ActionResult OnGet()
+    {
+        if (ValidateSession())
+        {
+            return RedirectToPage("/Auth/Account");
+        }
+
+        return Page();
     }
 
-    public ActionResult OnGet() => ValidateSession() ? RedirectToPage("/Auth/Account") : Page();
-
+    // Called when POST request is sent to the page. Validates login form and
+    // redirects to "Account" page if the validation succeed.
     public ActionResult OnPost()
     {
         if (ValidateForm())
         {
-            User user = _context.User.FirstOrDefault(u => u.Email == User.Email);
+            User? user = context.User
+                .FirstOrDefault(u => u.Email == User!.Email);
             
-            HttpContext.Session.SetInt32("UserId", user.Id);
-            HttpContext.Session.SetInt32("IsManager", user.IsManager ? 1 : 0);
+            HttpContext.Session.SetInt32("UserId", user!.Id);
             return RedirectToPage("/Auth/Account");
         }
 
@@ -39,13 +55,14 @@ public class LoginModel : PageModel
 
     private bool ValidateForm()
     {
-        User? user = _context.User.FirstOrDefault(u => u.Email == User.Email);
+        User? user = context.User.FirstOrDefault(u => u.Email == User!.Email);
 
-        return ValidateEmail(User.Email, out EmailValidationError) && ValidatePassword(User.Password, out PasswordValidationError);
+        return ValidateEmail(User!.Email, out EmailValidationError) &&
+               ValidatePassword(User.Password, out PasswordValidationError);
         
         bool ValidateEmail(string email, out string validationError)
         {
-            if (user is not null)
+            if (user != null)
             {
                 validationError = String.Empty;
                 return true;
@@ -71,7 +88,7 @@ public class LoginModel : PageModel
 
         bool ValidatePassword(string password, out string validationError)
         {
-            if (user.Password == password)
+            if (user!.Password == password)
             {
                 validationError = String.Empty;
                 return true;
@@ -87,6 +104,9 @@ public class LoginModel : PageModel
             return false;
         }
     }
-    
-    private bool ValidateSession() => HttpContext.Session.GetInt32("UserId") is not null;
+
+    private bool ValidateSession()
+    {
+        return HttpContext.Session.GetInt32("UserId") != null;
+    }
 }

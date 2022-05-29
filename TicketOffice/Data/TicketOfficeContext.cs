@@ -1,10 +1,5 @@
 #nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using TicketOffice.Models;
 
 namespace TicketOffice.Data
 {
@@ -15,13 +10,13 @@ namespace TicketOffice.Data
         {
         }
 
-        public DbSet<TicketOffice.Models.User> User { get; set; }
+        public DbSet<Models.User> User { get; set; }
 
-        public DbSet<TicketOffice.Models.Route> Route { get; set; }
+        public DbSet<Models.Route> Route { get; set; }
         
-        public DbSet<TicketOffice.Models.RouteCity> RouteCity { get; set; }
-        public DbSet<TicketOffice.Models.TicketCity> TicketCity { get; set; }
+        public DbSet<Models.RouteCity> RouteCity { get; set; }
+        public DbSet<Models.TicketCity> TicketCity { get; set; }
 
-        public DbSet<TicketOffice.Models.Ticket> Ticket { get; set; }
+        public DbSet<Models.Ticket> Ticket { get; set; }
     }
 }

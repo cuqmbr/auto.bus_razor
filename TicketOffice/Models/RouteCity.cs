@@ -12,8 +12,8 @@ public class RouteCity
      MinLength(2, ErrorMessage = "Назва міста не може бути менше 2 символів")]
     [Display(Name = "Назва міста")]
     [Required(ErrorMessage = "Поле має бути заповненим")]
-    public string Name { get; set; }
-    
+    public string Name { get; set; } = null!;
+
     [Display(Name = "Дата відправлення")]
     [DataType(DataType.Date)]
     public DateTime? ArrivalTime { get; set; }
@@ -24,5 +24,5 @@ public class RouteCity
     
     [ForeignKey("Route")]
     public int RouteId { get; set; }
-    public Route Route { get; set; }
+    public Route Route { get; set; } = null!;
 }
