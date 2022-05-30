@@ -200,7 +200,7 @@ public class IndexModel : PageModel
         return remainingCapacity;
     }
 
-    // Returns false is place is available otherwise returns false
+    // Returns true if place is available otherwise returns false.
     public bool IsTakenPlace(Route route, int place)
     {
         foreach (var ticket in route.Tickets!.Where(t => t.PassengerPlace == place))
