@@ -1,0 +1,60 @@
+@page
+@model TicketOffice.Pages.Management.Routes.EditModel
+
+@{
+    ViewData["Title"] = $"Редагування Маршруту";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/Management/Create.css"/>
+
+<div class="wrapper">
+    
+    <form method="post">
+        <div class="header">
+            Редагування рейсу
+        </div>
+        
+        <div class="field">
+            <input class="field" type="number" placeholder="Номер автобуса" min="1" max="9999" autocomplete="off" asp-for="Route.Number"/>
+            <div class="validation-error"><span>@Model.NumberValidationError</span></div>
+        </div>
+
+        <div class="field">
+            <input class="field" type="number" placeholder="Ємність" min="5" max="40" autocomplete="off" asp-for="Route.Capacity"/>
+            <div class="validation-error"><span>@Model.CapacityValidationError</span></div>
+        </div>
+        
+        <h2>Маршрут</h2>
+        
+        @for (int i = 0; i < @Model.Route.Cities.Count; i++)
+        {
+            <div class="new-city">
+                <div class="city-name">
+                    <input class="field-city" type="text" placeholder="Назва" autocomplete="off" asp-for="Route.Cities[i].Name">
+                    <div class="validation-error"><span>@Model.NameValidationError[i]</span></div>
+                </div>
+            
+                <div class="city-date">
+                    <input class="field-city" type="text" placeholder="Дата й час прибуття" autocomplete="off" asp-for="TimeStrings[i].ArrivalDate">
+                    <div class="validation-error"><span></span>@Model.ArrivalTimeValidationError[i]</div>
+                </div>
+            
+                <div class="city-date">
+                    <input class="field-city" type="text" placeholder="Дата й час відправлення" autocomplete="off" asp-for="TimeStrings[i].DepartureDate">
+                    <div class="validation-error"><span>@Model.DepartureTimeValidationError[i]</span></div>
+                </div>
+                
+                <input type="number" hidden value="@Model.Route.Cities[i].Id" asp-for="CityIds[i]">
+            </div>
+        }
+        
+        <input class="submit-btn" type="submit" value="Зберегти"/>
+        
+        <div class="hint">
+            <a href="./Index" class="link">Назад до Списку</a>
+        </div>
+    </form>
+    
+</div>
+

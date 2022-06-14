@@ -22,6 +22,11 @@
     <a class="@(path == "/" ? "active" : "")" href="/">Головна</a>
     <a class="@(path.Contains("routes") ? "active" : "")" href="/Routes">Пошук маршрутів</a>
     <div class="topnav-right">
+        @if (Context.Session.GetInt32("IsManager") != null && Context.Session.GetInt32("IsManager") == 1)
+        {
+            <a class="@(path.Contains("management/routes") ? "active" : "")" href="/Management/Routes">Управління маршрутами</a>
+        }
+        
         @if (Context.Session.GetString("UserId") != null)
         {
             <a class="@(path.Contains("account") ? "active" : "")" href="/Auth/Account">Мої квитки</a>

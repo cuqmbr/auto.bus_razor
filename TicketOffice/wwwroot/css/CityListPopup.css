@@ -47,6 +47,7 @@ tr.tr-intermediate {
 th.th-route, td.td-route {
     height: 4rem;
     line-height: 1.25rem;
+    font-size: 1rem;
     text-align: center;
     padding: 0 0.5rem;
 }

@@ -28,8 +28,15 @@ public class SeedData
         {
             new User
             {
-                Email = "danylo.nazarko@nure.ua",
-                Password = "*Hashed Password*",
+                Email = "admin",
+                Password = "admin",
+                IsManager = true
+            },
+            new User
+            {
+                Email = "user",
+                Password = "user",
+                IsManager = false
             }
         });
         

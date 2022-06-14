@@ -131,6 +131,9 @@ namespace TicketOffice.Migrations
                         .HasMaxLength(48)
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsManager")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(32)

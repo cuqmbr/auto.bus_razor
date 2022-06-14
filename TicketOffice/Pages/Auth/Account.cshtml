@@ -54,6 +54,7 @@
                     </div>
                     <div class="ticket-footer">
                         <a class="ticket-link-btn" onclick="document.getElementById('popup-city-list-@ticket.Id').style.display = 'inherit'">Маршрут</a>
+                        <a class="ticket-link-btn" asp-page-handler="TicketPdf" asp-route-pdfTicketId="@ticket.Id">Скачати квиток</a>
                         <a class="ticket-link-btn" onclick="document.getElementById('popup-info-@ticket.Id').style.display = 'inherit'">Повернути</a>
                     </div>
                 </div>
@@ -154,7 +155,7 @@
                 </div>
                 <div class="popup-info-footer">
                     <a class="popup-info-footer-link-button" onclick="document.getElementById('popup-info-@ticket.Id').style.display = 'none'">Відмінити</a>
-                    <a class="popup-info-footer-link-button" asp-page-handler="ReturnTicket" asp-route-ReturnTicketId="@ticket.Id">Повернути</a>
+                    <a class="popup-info-footer-link-button" asp-page-handler="ReturnTicket" asp-route-returnTicketId="@ticket.Id">Повернути</a>
                 </div>
             </div>
         </div>

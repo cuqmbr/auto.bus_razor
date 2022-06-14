@@ -11,7 +11,7 @@ using TicketOffice.Data;
 namespace TicketOffice.Migrations
 {
     [DbContext(typeof(TicketOfficeContext))]
-    [Migration("20220529081528_Initial_Create")]
+    [Migration("20220609073909_Initial_Create")]
     partial class Initial_Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -132,6 +132,9 @@ namespace TicketOffice.Migrations
                         .IsRequired()
                         .HasMaxLength(48)
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsManager")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Password")
                         .IsRequired()

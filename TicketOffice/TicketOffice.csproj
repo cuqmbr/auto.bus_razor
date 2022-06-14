@@ -9,6 +9,7 @@
     <ItemGroup>
       <Folder Include="Data" />
       <Folder Include="Migrations" />
+      <Folder Include="Pages\Management\Routes" />
       <Folder Include="wwwroot\db" />
     </ItemGroup>
 
@@ -27,6 +28,8 @@
       </PackageReference>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
       <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
+      <PackageReference Include="PdfPig" Version="0.1.6" />
+      <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     </ItemGroup>
 
     <ItemGroup>

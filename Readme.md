@@ -4,30 +4,28 @@
 
 ### Встановлення:
 
-Скомпільований (на linux) та налаштований проєкт знаходиться у каталозі ~/TicketOffice/bin/Release/net6.0 
-Якщо немає ніяких проблем із його запуском можна пропустити наступні пункти
+1. Compile the project (`[~]$ dotnet build -c Release` or in IDE)
+2. Copy ~/TicketOffice/wwwroot to the root directory of compiled project (clean database can be found in ~/wwwroot/db)
+3. Launch
 
-1. Скомпілювати проєкт ([~]$ dotnet build -c Release або за допомогою інтегрованої середи розробки)
-2. Скопіювати каталог ~/wwwroot/ у кореневий каталог скомпільованого проєкту (Чиста БД міститься у ~/wwwroot/db. Вона заповнюється інформацією самостійно, при першому запуску програми)
-3. Запустити скомпільований проєкт
-
-* ~ – кореневий каталог вихідного коду проєкту
-
-### Доступні маршрути:
+### Available routes:
 
 #### № 027
 
 - Сватове -> Красноріченське -> Кремінна -> Рубіжне -> Сєвєродонецьк -> Лисичанськ -> Сєвєродонецьк -> Рубіжне -> Кремінна -> Красноріченське -> Сватове 
-- (Дата: дата першого запуску проєкту після додавання пустого файлу бази даних)
+- (Date: date of the first launch of project with clean database)
 
 #### № 013
 
 - Кремінна -> Рубіжне -> Сєвєродонецьк -> Станиця Луганська -> Сєвєродонецьк -> Рубіжне -> Кремінна 
-- (Дата: дата першого запуску проєкту після додавання пустого файлу бази даних)
+- (Date: date of the first launch of project with clean database)
 
-### Тестовий аккаунт
+### Test user account
 
-#### e-mail: danylo.nazarko@nure.ua
-#### password: *Hashed Password*
+- e-mail: user
+- password: user
 
-#### Альтернативно можно створити власний аккаунт.
+### Test admin account
+
+- e-mail: admin
+- password: admin

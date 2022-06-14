@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TicketOffice.Data;
 using TicketOffice.Models;
+using TicketOffice.Services;
 
 namespace TicketOffice.Pages.Auth;
 
@@ -15,10 +16,13 @@ public class RegistrationModel : PageModel
     public string PasswordValidationError = null!;
 
     private readonly TicketOfficeContext context;
+    private readonly UserValidationService validationService;
     
-    public RegistrationModel(TicketOfficeContext context)
+    public RegistrationModel(TicketOfficeContext context,
+        UserValidationService validationService)
     {
         this.context = context;
+        this.validationService = validationService;
     }
     
     [BindProperty]
@@ -28,7 +32,7 @@ public class RegistrationModel : PageModel
     // redirects to "Account" page if user already logged in.
     public ActionResult OnGet()
     {
-        if (ValidateSession())
+        if (validationService.IsAuthorized(HttpContext))
         {
             return RedirectToPage("/Auth/Account");
         }
@@ -119,10 +123,5 @@ public class RegistrationModel : PageModel
             validationError = String.Empty;
             return true;
         }
-    }
-    
-    private bool ValidateSession()
-    {
-        return HttpContext.Session.GetInt32("UserId") != null;
     }
 }

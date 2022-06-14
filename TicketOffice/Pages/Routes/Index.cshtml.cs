@@ -335,7 +335,7 @@ public class IndexModel : PageModel
         }
         
         Routes!.RemoveAll(r =>
-            r.Cities.First().DepartureTime!.Value.DayOfYear != Date?.DayOfYear);
+            r.Cities.First().DepartureTime!.Value.Date != Date?.Date);
     }
 
     private void GetRoutes()

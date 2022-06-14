@@ -25,6 +25,10 @@ public class User
      ErrorMessage = "Проль має містити великі та малі латинські літери, цифри та спеціальні знаки (@, $, % та ін.)")]
     public string Password { get; set; } = null!;
 
+    [Required(ErrorMessage = "Поле має бути заповненим")]
+    [Display(Name = "Адмімістратор?")]
+    public bool IsManager { get; set; }
+    
 
     public ICollection<Ticket>? Tickets { get; set; }
 }

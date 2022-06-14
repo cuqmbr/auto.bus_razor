@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TicketOffice.Data;
 using TicketOffice.Models;
+using TicketOffice.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,9 @@ builder.Services.AddRazorPages()
 
 builder.Services.AddDbContext<TicketOfficeContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("TicketOfficeContext")));
+
+builder.Services.AddScoped<UserValidationService>();
+builder.Services.AddScoped<PdfService>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>

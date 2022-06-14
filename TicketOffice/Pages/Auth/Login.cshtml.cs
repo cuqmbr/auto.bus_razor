@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TicketOffice.Data;
 using TicketOffice.Models;
+using TicketOffice.Services;
 
 namespace TicketOffice.Pages.Auth;
 
@@ -15,10 +16,13 @@ public class LoginModel : PageModel
     public string PasswordValidationError = null!;
 
     private readonly TicketOfficeContext context;
+    private readonly UserValidationService validationService;
     
-    public LoginModel(TicketOfficeContext context)
+    public LoginModel(TicketOfficeContext context,
+        UserValidationService validationService)
     {
         this.context = context;
+        this.validationService = validationService;
     }
     
     // Object representing a user who wants to login.
@@ -29,7 +33,7 @@ public class LoginModel : PageModel
     // redirects to "Account" page if user already logged in.
     public ActionResult OnGet()
     {
-        if (ValidateSession())
+        if (validationService.IsAuthorized(HttpContext))
         {
             return RedirectToPage("/Auth/Account");
         }
@@ -47,6 +51,7 @@ public class LoginModel : PageModel
                 .FirstOrDefault(u => u.Email == User!.Email);
             
             HttpContext.Session.SetInt32("UserId", user!.Id);
+            HttpContext.Session.SetInt32("IsManager", user!.IsManager ? 1 : 0);
             return RedirectToPage("/Auth/Account");
         }
 
@@ -103,10 +108,5 @@ public class LoginModel : PageModel
             validationError = "Неправильний пароль";
             return false;
         }
-    }
-
-    private bool ValidateSession()
-    {
-        return HttpContext.Session.GetInt32("UserId") != null;
     }
 }
