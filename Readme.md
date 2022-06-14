@@ -1,8 +1,8 @@
-## auto.bus (Ticket Office) – пошук та купівля квитків на автобус онлайн
+## auto.bus (Ticket Office) – manage, search and buy bus tickets online
 
 - C#, Microsoft.EntityFrameworkCore, Razor Pages
 
-### Встановлення:
+### Installation:
 
 1. Compile the project (`[~]$ dotnet build -c Release` or in IDE)
 2. Copy ~/TicketOffice/wwwroot to the root directory of compiled project (clean database can be found in ~/wwwroot/db)
