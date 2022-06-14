@@ -20,7 +20,7 @@
     }
     
     <a class="@(path == "/" ? "active" : "")" href="/">Головна</a>
-    <a class="@(path.Contains("routes") ? "active" : "")" href="/Routes">Пошук маршрутів</a>
+    <a class="@(path == "/routes") ? "active" : "")" href="/Routes">Пошук маршрутів</a>
     <div class="topnav-right">
         @if (Context.Session.GetInt32("IsManager") != null && Context.Session.GetInt32("IsManager") == 1)
         {
