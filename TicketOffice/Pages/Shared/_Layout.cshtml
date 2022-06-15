@@ -20,11 +20,8 @@
     }
     
     <a class="@(path == "/" ? "active" : "")" href="/">Головна</a>
-<<<<<<< HEAD
-    <a class="@(path == "/routes") ? "active" : "")" href="/Routes">Пошук маршрутів</a>
-=======
     <a class="@(path == "/routes" ? "active" : "")" href="/Routes">Пошук маршрутів</a>
->>>>>>> bcb4317 (fix: link highlghting)
+
     <div class="topnav-right">
         @if (Context.Session.GetInt32("IsManager") != null && Context.Session.GetInt32("IsManager") == 1)
         {
