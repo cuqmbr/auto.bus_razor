@@ -25,12 +25,14 @@
 - Кремінна -> Рубіжне -> Сєвєродонецьк -> Станиця Луганська -> Сєвєродонецьк -> Рубіжне -> Кремінна 
 - (Date: date of the first launch of project with clean database)
 
-### Test user account
+### Test accounts
+
+#### User
 
 - e-mail: user
 - password: user
 
-### Test admin account
+#### Admin
 
 - e-mail: admin
 - password: admin
