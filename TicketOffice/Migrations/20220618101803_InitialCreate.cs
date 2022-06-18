@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TicketOffice.Migrations
 {
-    public partial class Initial_Create : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,6 +47,7 @@ namespace TicketOffice.Migrations
                     Name = table.Column<string>(type: "TEXT", maxLength: 24, nullable: false),
                     ArrivalTime = table.Column<DateTime>(type: "TEXT", nullable: true),
                     DepartureTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    CostFromPreviousCity = table.Column<double>(type: "REAL", nullable: true),
                     RouteId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -69,6 +70,7 @@ namespace TicketOffice.Migrations
                     PassengerFirstName = table.Column<string>(type: "TEXT", nullable: false),
                     PassengerLastName = table.Column<string>(type: "TEXT", nullable: false),
                     PassengerPlace = table.Column<int>(type: "INTEGER", nullable: false),
+                    OderDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
                     RouteId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -98,6 +100,7 @@ namespace TicketOffice.Migrations
                     Name = table.Column<string>(type: "TEXT", maxLength: 24, nullable: false),
                     ArrivalTime = table.Column<DateTime>(type: "TEXT", nullable: true),
                     DepartureTime = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    CostFromPreviousCity = table.Column<double>(type: "REAL", nullable: true),
                     TicketId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

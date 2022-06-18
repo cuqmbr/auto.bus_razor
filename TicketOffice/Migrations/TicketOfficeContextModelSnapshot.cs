@@ -43,6 +43,9 @@ namespace TicketOffice.Migrations
                     b.Property<DateTime?>("ArrivalTime")
                         .HasColumnType("TEXT");
 
+                    b.Property<double?>("CostFromPreviousCity")
+                        .HasColumnType("REAL");
+
                     b.Property<DateTime?>("DepartureTime")
                         .HasColumnType("TEXT");
 
@@ -66,6 +69,9 @@ namespace TicketOffice.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("OderDate")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PassengerFirstName")
                         .IsRequired()
@@ -101,6 +107,9 @@ namespace TicketOffice.Migrations
 
                     b.Property<DateTime?>("ArrivalTime")
                         .HasColumnType("TEXT");
+
+                    b.Property<double?>("CostFromPreviousCity")
+                        .HasColumnType("REAL");
 
                     b.Property<DateTime?>("DepartureTime")
                         .HasColumnType("TEXT");

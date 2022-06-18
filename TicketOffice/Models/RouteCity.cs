@@ -22,6 +22,10 @@ public class RouteCity
     [DataType(DataType.Date)]
     public DateTime? DepartureTime { get; set; }
     
+    [Display(Name = "Ціна подорожі з попереднього міста")]
+    [DataType(DataType.Currency)]
+    public double? CostFromPreviousCity { get; set; }
+    
     [ForeignKey("Route")]
     public int RouteId { get; set; }
     public Route Route { get; set; } = null!;

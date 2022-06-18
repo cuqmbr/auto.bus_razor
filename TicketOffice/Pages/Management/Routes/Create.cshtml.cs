@@ -17,15 +17,15 @@ public class CreateModel : PageModel
     public string CapacityValidationError = null!;
     
     // Array of error massages displaying when route name validation failed.
-    public string[] NameValidationError;
+    public string[] NameValidationError = null!;
     
     // Array of error massages displaying when cities
     // departure time validation failed.
-    public string[] DepartureTimeValidationError;
+    public string[] DepartureTimeValidationError = null!;
     
     // Array of error massages displaying when cities
     // arrival time validation failed.
-    public string[] ArrivalTimeValidationError;
+    public string[] ArrivalTimeValidationError = null!;
     
     private readonly TicketOfficeContext context;
     private readonly UserValidationService validationService;
@@ -39,12 +39,12 @@ public class CreateModel : PageModel
 
     // Object representing that will be created.
     [BindProperty]
-    public Route Route { get; set; }
+    public Route Route { get; set; } = null!;
 
     // Object holding cities' arrival/departure dates.
     [BindProperty]
-    public DateString[] TimeStrings { get; set; }
-    
+    public DateString[] TimeStrings { get; set; } = null!;
+
     // Amount of cities to be added to the route
     [BindProperty]
     public int? CitiesCount { get; set; }
@@ -109,9 +109,9 @@ public class CreateModel : PageModel
             try
             {
                 Route.Cities[i].DepartureTime =
-                    ConvertStringToDate(TimeStrings[i].DepartureDate);
+                    ConvertStringToDate(TimeStrings[i].DepartureDate!);
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 if (Route.Cities.Count > 2)
                 {
@@ -126,9 +126,9 @@ public class CreateModel : PageModel
             try
             {
                 Route.Cities[i].ArrivalTime =
-                    ConvertStringToDate(TimeStrings[i].ArrivalDate);
+                    ConvertStringToDate(TimeStrings[i].ArrivalDate!);
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 if (Route.Cities.Count > 2)
                 {

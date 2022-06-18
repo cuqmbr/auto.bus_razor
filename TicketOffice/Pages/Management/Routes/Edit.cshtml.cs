@@ -18,15 +18,15 @@ public class EditModel : PageModel
     public string CapacityValidationError = null!;
     
     // Array of error massages displaying when route name validation failed.
-    public string[] NameValidationError;
+    public string[] NameValidationError = null!;
     
     // Array of error massages displaying when cities
     // departure time validation failed.
-    public string[] DepartureTimeValidationError;
+    public string[] DepartureTimeValidationError = null!;
     
     // Array of error massages displaying when cities
     // arrival time validation failed.
-    public string[] ArrivalTimeValidationError;
+    public string[] ArrivalTimeValidationError = null!;
 
     private readonly TicketOfficeContext context;
     private readonly UserValidationService validationService;
@@ -40,15 +40,15 @@ public class EditModel : PageModel
 
     // Object representing that will be created.
     [BindProperty]
-    public Route Route { get; set; }
+    public Route? Route { get; set; }
 
     // Object holding cities' arrival/departure dates.
     [BindProperty]
-    public DateString[] TimeStrings { get; set; }
+    public DateString[] TimeStrings { get; set; } = null!;
 
     // Holds cities' ids between loading and saving
     [BindProperty]
-    public int[] CityIds { get; set; }
+    public int[] CityIds { get; set; } = null!;
 
     // Called when GET request is sent to the page.
     // Retrieves route.
@@ -93,7 +93,7 @@ public class EditModel : PageModel
         InitializeArrays();
         InsertDatesIntoCities();
         LoadCityIds();
-        Route.Id = (int) id;
+        Route!.Id = (int) id;
 
         if (!ValidateInput())
         {
@@ -133,15 +133,15 @@ public class EditModel : PageModel
     
     private void InsertDatesIntoCities()
     {
-        for (int i = 0; i < Route.Cities.Count; i++)
+        for (int i = 0; i < Route!.Cities.Count; i++)
         {
 
             try
             {
                 Route.Cities[i].DepartureTime =
-                    ConvertStringToDate(TimeStrings[i].DepartureDate);
+                    ConvertStringToDate(TimeStrings[i].DepartureDate!);
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 if (Route.Cities.Count > 2)
                 {
@@ -155,9 +155,9 @@ public class EditModel : PageModel
             try
             {
                 Route.Cities[i].ArrivalTime =
-                    ConvertStringToDate(TimeStrings[i].ArrivalDate);
+                    ConvertStringToDate(TimeStrings[i].ArrivalDate!);
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 if (Route.Cities.Count > 2)
                 {
@@ -195,17 +195,17 @@ public class EditModel : PageModel
 
     private void InsertDatesIntoStrings()
     {
-        for (int i = 0; i < Route.Cities.Count; i++)
+        for (int i = 0; i < Route!.Cities.Count; i++)
         {
             if (Route.Cities[i].DepartureTime != null)
             {
-                TimeStrings[i].DepartureDate = Route.Cities[i].DepartureTime
+                TimeStrings[i].DepartureDate = Route.Cities[i].DepartureTime!
                     .Value.ToString("dd.MM.yyyy, hh:mm");
             }
             
             if (Route.Cities[i].ArrivalTime != null)
             {
-                TimeStrings[i].ArrivalDate = Route.Cities[i].ArrivalTime
+                TimeStrings[i].ArrivalDate = Route.Cities[i].ArrivalTime!
                     .Value.ToString("dd.MM.yyyy, hh:mm");
             }
         } 
@@ -215,7 +215,7 @@ public class EditModel : PageModel
     // an idea. It should be removed.
     private void SaveCityIds()
     {
-        CityIds = new int[Route.Cities.Count];
+        CityIds = new int[Route!.Cities.Count];
 
         for (int i = 0; i < Route.Cities.Count; i++)
         {
@@ -227,13 +227,13 @@ public class EditModel : PageModel
     {
         for (int i = 0; i < CityIds.Length; i++)
         {
-            Route.Cities[i].Id = CityIds[i];
+            Route!.Cities[i].Id = CityIds[i];
         }
     }
     
     private bool ValidateInput()
     {
-        bool isValidNumber = ValidateNumber(Route.Number, out NumberValidationError);
+        bool isValidNumber = ValidateNumber(Route!.Number, out NumberValidationError);
 
         bool isValidCapacity = ValidateCapacity(Route.Capacity, out CapacityValidationError);
 
@@ -352,7 +352,7 @@ public class EditModel : PageModel
 
     private void InitializeArrays()
     {
-        NameValidationError = InitializeArray<string>(Route.Cities.Count, "");
+        NameValidationError = InitializeArray<string>(Route!.Cities.Count, "");
         DepartureTimeValidationError = InitializeArray<string>(Route.Cities.Count, "");
         ArrivalTimeValidationError = InitializeArray<string>(Route.Cities.Count, "");
     }

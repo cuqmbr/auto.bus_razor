@@ -51,21 +51,19 @@ public class SeedData
                     new RouteCity
                     {
                         Name = "Сватове",
-                        
                         ArrivalTime = null,
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
                             DateTime.Today.Day, 
                             6,
                             30,
-                            0)
+                            0),
+                        CostFromPreviousCity = null
                     },
                     new RouteCity
                     {
                         Name = "Красноріченське",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -73,19 +71,18 @@ public class SeedData
                             7,
                             10,
                             0),
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
                             DateTime.Today.Day, 
                             7,
                             20,
-                            0)
+                            0),
+                        CostFromPreviousCity = 30
                     },
                     new RouteCity
                     {
                         Name = "Кремінна",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -93,19 +90,18 @@ public class SeedData
                             7,
                             50,
                             0),
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
                             DateTime.Today.Day, 
                             8,
                             0,
-                            0)
+                            0),
+                        CostFromPreviousCity = 30
                     },
                     new RouteCity
                     {
                         Name = "Рубіжне",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -113,19 +109,18 @@ public class SeedData
                             8,
                             30,
                             0),
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
                             DateTime.Today.Day, 
                             8,
                             40,
-                            0)
+                            0),
+                        CostFromPreviousCity = 15
                     },
                     new RouteCity
                     {
                         Name = "Сєвєродонецьк",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -133,19 +128,18 @@ public class SeedData
                             9,
                             10,
                             0),
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
                             DateTime.Today.Day, 
                             9,
                             20,
-                            0)
+                            0),
+                        CostFromPreviousCity = 15
                     },
                     new RouteCity
                     {
                         Name = "Лисичанськ",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -153,7 +147,6 @@ public class SeedData
                             9,
                             50,
                             0),
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -161,11 +154,11 @@ public class SeedData
                             12,
                             0,
                             0),
+                        CostFromPreviousCity = 20
                     },
                     new RouteCity
                     {
                         Name = "Сєвєродонецьк",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -173,19 +166,18 @@ public class SeedData
                             12,
                             30,
                             0),
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
                             DateTime.Today.Day, 
                             12,
                             40,
-                            0)
+                            0),
+                        CostFromPreviousCity = 20
                     },
                     new RouteCity
                     {
                         Name = "Рубіжне",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -193,19 +185,18 @@ public class SeedData
                             13,
                             10,
                             0),
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
                             DateTime.Today.Day, 
                             13,
                             20,
-                            0)
+                            0),
+                        CostFromPreviousCity = 15
                     },
                     new RouteCity
                     {
                         Name = "Кремінна",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -213,19 +204,18 @@ public class SeedData
                             13,
                             50,
                             0),
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
                             DateTime.Today.Day, 
                             14,
                             0,
-                            0)
+                            0),
+                        CostFromPreviousCity = 15
                     },
                     new RouteCity
                     {
                         Name = "Красноріченське",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -233,19 +223,18 @@ public class SeedData
                             14,
                             30,
                             0),
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
                             DateTime.Today.Day, 
                             14,
                             40,
-                            0)
+                            0),
+                        CostFromPreviousCity = 30
                     },
                     new RouteCity
                     {
                         Name = "Сватове",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -253,8 +242,8 @@ public class SeedData
                             15,
                             20,
                             0),
-                
-                        DepartureTime = null
+                        DepartureTime = null,
+                        CostFromPreviousCity = 30
                     }
                 }
             },
@@ -267,21 +256,19 @@ public class SeedData
                     new RouteCity
                     {
                         Name = "Кремінна",
-                        
                         ArrivalTime = null,
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
                             DateTime.Today.Day, 
                             7,
                             0,
-                            0)
+                            0),
+                        CostFromPreviousCity = null
                     },
                     new RouteCity
                     {
                         Name = "Рубіжне",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -289,19 +276,18 @@ public class SeedData
                             7,
                             30,
                             0),
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
                             DateTime.Today.Day, 
                             7,
                             40,
-                            0)
+                            0),
+                        CostFromPreviousCity = 15
                     },
                     new RouteCity
                     {
                         Name = "Сєвєродонецьк",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -309,19 +295,18 @@ public class SeedData
                             8,
                             10,
                             0),
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
                             DateTime.Today.Day, 
                             8,
                             20,
-                            0)
+                            0),
+                        CostFromPreviousCity = 15
                     },
                     new RouteCity
                     {
                         Name = "Станиця Луганська",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -329,19 +314,18 @@ public class SeedData
                             9,
                             20,
                             0),
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
                             DateTime.Today.Day, 
                             11,
                             20,
-                            0)
+                            0),
+                        CostFromPreviousCity = 40
                     },
                     new RouteCity
                     {
                         Name = "Сєвєродонецьк",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -349,19 +333,18 @@ public class SeedData
                             12,
                             20,
                             0),
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
                             DateTime.Today.Day, 
                             12,
                             30,
-                            0)
+                            0),
+                        CostFromPreviousCity = 40
                     },
                     new RouteCity
                     {
                         Name = "Рубіжне",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -369,19 +352,18 @@ public class SeedData
                             13,
                             0,
                             0),
-                
                         DepartureTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
                             DateTime.Today.Day, 
                             13,
                             10,
-                            0)
+                            0),
+                        CostFromPreviousCity = 15
                     },
                     new RouteCity
                     {
                         Name = "Кремінна",
-                        
                         ArrivalTime = new DateTime(
                             DateTime.Today.Year, 
                             DateTime.Today.Month,
@@ -389,8 +371,8 @@ public class SeedData
                             13,
                             40,
                             0),
-                
-                        DepartureTime = null
+                        DepartureTime = null,
+                        CostFromPreviousCity = 15
                     }
                 }
             }

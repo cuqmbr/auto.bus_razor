@@ -45,7 +45,7 @@ public class PdfService
             firstParagraphPoint,
             roboto);
         page.AddText(
-            $"№ {ticket.RouteId}",
+            $"№ {ticket.Route.Number}",
             14,
             firstParagraphPoint.Translate(250, 0),
             roboto);
@@ -88,6 +88,39 @@ public class PdfService
                 $" {ticket.Cities.Last().ArrivalTime?.ToString("HH:mm")}",
             14,
             firstParagraphPoint.Translate(250, 3 * -lineHeight),
+            roboto);
+        
+        page.AddText(
+            "Ціна:",
+            14,
+            firstParagraphPoint.Translate(0, 4 * -lineHeight),
+            roboto);
+        page.AddText(
+            $"{ticket.GetTotalCost()}",
+            14,
+            firstParagraphPoint.Translate(250, 4 * -lineHeight),
+            roboto);
+        
+        page.AddText(
+            "Дата придбання квитка:",
+            14,
+            firstParagraphPoint.Translate(0, 6 * -lineHeight),
+            roboto);
+        page.AddText(
+            $"{ticket.OderDate.ToString("dd.MM.yyyy, HH:mm:ss")}",
+            14,
+            firstParagraphPoint.Translate(250, 6 * -lineHeight),
+            roboto);
+        
+        page.AddText(
+            "Дата генерації квитка:",
+            14,
+            firstParagraphPoint.Translate(0, 7 * -lineHeight),
+            roboto);
+        page.AddText(
+            $"{DateTime.Now.ToString("dd.MM.yyyy, HH:mm:ss")}",
+            14,
+            firstParagraphPoint.Translate(250, 7 * -lineHeight),
             roboto);
         
         byte[] document = builder.Build();

@@ -11,8 +11,8 @@ using TicketOffice.Data;
 namespace TicketOffice.Migrations
 {
     [DbContext(typeof(TicketOfficeContext))]
-    [Migration("20220609073909_Initial_Create")]
-    partial class Initial_Create
+    [Migration("20220618101803_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,6 +45,9 @@ namespace TicketOffice.Migrations
                     b.Property<DateTime?>("ArrivalTime")
                         .HasColumnType("TEXT");
 
+                    b.Property<double?>("CostFromPreviousCity")
+                        .HasColumnType("REAL");
+
                     b.Property<DateTime?>("DepartureTime")
                         .HasColumnType("TEXT");
 
@@ -68,6 +71,9 @@ namespace TicketOffice.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("OderDate")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PassengerFirstName")
                         .IsRequired()
@@ -103,6 +109,9 @@ namespace TicketOffice.Migrations
 
                     b.Property<DateTime?>("ArrivalTime")
                         .HasColumnType("TEXT");
+
+                    b.Property<double?>("CostFromPreviousCity")
+                        .HasColumnType("REAL");
 
                     b.Property<DateTime?>("DepartureTime")
                         .HasColumnType("TEXT");

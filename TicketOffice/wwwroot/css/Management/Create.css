@@ -41,7 +41,13 @@ div.city-name {
 }
 
 div.city-date {
-    width: 17.5rem;
+    width: 15rem;
+    margin: 0 auto;
+    font-size: 0.9rem;
+}
+
+div.city-cost {
+    width: 7.5rem;
     margin: 0 auto;
     font-size: 1rem;
 }

@@ -75,9 +75,10 @@ public class IndexModel : PageModel
             return OnGet();
         }
 
-        CopyCitiesToTicket();
+        CopyDataToTicket();
         RevertChangesToRouteCities();
         
+        Ticket.OderDate = DateTime.Now;
         context.Ticket.Add(Ticket);
         context.SaveChanges();
        
@@ -387,7 +388,7 @@ public class IndexModel : PageModel
         return true;
     }
 
-    private void CopyCitiesToTicket()
+    private void CopyDataToTicket()
     {
         List<RouteCity> routeCities = 
             Routes!.Find(r => r.Id == Ticket!.RouteId)!.Cities.ToList();
@@ -400,7 +401,8 @@ public class IndexModel : PageModel
             {
                 Name = city.Name,
                 DepartureTime = city.DepartureTime,
-                ArrivalTime = city.ArrivalTime
+                ArrivalTime = city.ArrivalTime,
+                CostFromPreviousCity = city.CostFromPreviousCity
             });
         }
     }

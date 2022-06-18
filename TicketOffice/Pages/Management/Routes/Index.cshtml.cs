@@ -37,11 +37,7 @@ namespace TicketOffice.Pages.Management.Routes
         // Search condition: departure date.
         [BindProperty(SupportsGet = true)]
         public DateTime? Date { get; set; }
-        
-        // Will be set when user confirm route deletion.
-        [BindProperty(SupportsGet = true)] 
-        public int DeleteRouteId { get; set; }
-        
+
         // Called when GET request is sent to the page.
         // Retrieves routes based on search conditions.
         public ActionResult OnGet()
@@ -61,11 +57,11 @@ namespace TicketOffice.Pages.Management.Routes
         }
         
         // Called when user confirms route deletion.
-        public ActionResult OnGetDeleteRoute()
+        public ActionResult OnGetDeleteRoute(int deleteRouteId)
         {
             OnGet();
 
-            Route? deleteRoute = context.Route.Find(DeleteRouteId);
+            Route? deleteRoute = context.Route.Find(deleteRouteId);
 
             if (deleteRoute != null)
             {
@@ -92,7 +88,7 @@ namespace TicketOffice.Pages.Management.Routes
                 return;
             }
             
-            Routes.RemoveAll(r => r.Number != Number);
+            Routes!.RemoveAll(r => r.Number != Number);
         }
         
         private void FilterRoutesByFrom()
@@ -102,7 +98,7 @@ namespace TicketOffice.Pages.Management.Routes
                 return;
             }
             
-            Routes.RemoveAll(r => r.Cities.All(c => c.Name != From));
+            Routes!.RemoveAll(r => r.Cities.All(c => c.Name != From));
         }
 
         private void FilterRoutesByTo()
@@ -112,7 +108,7 @@ namespace TicketOffice.Pages.Management.Routes
                 return;
             }
             
-            Routes.RemoveAll(r => r.Cities.All(c => c.Name != To));
+            Routes!.RemoveAll(r => r.Cities.All(c => c.Name != To));
         }
 
         private void FilterRoutesByDate()
@@ -122,7 +118,7 @@ namespace TicketOffice.Pages.Management.Routes
                 return;
             }
 
-            Routes.RemoveAll(r => 
+            Routes!.RemoveAll(r => 
                 r.Cities.All(c => 
                     c.DepartureTime?.Date != Date?.Date && 
                     c.ArrivalTime?.Date != Date?.Date));

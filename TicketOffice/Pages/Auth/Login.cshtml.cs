@@ -51,7 +51,7 @@ public class LoginModel : PageModel
                 .FirstOrDefault(u => u.Email == User!.Email);
             
             HttpContext.Session.SetInt32("UserId", user!.Id);
-            HttpContext.Session.SetInt32("IsManager", user!.IsManager ? 1 : 0);
+            HttpContext.Session.SetInt32("IsManager", user.IsManager ? 1 : 0);
             return RedirectToPage("/Auth/Account");
         }
 

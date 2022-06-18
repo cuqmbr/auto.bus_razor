@@ -120,6 +120,9 @@
                         Вільніих місць
                     </th>
                     <th>
+                        Ціна
+                    </th>
+                    <th>
                         Дії
                     </th>
                 </tr>
@@ -165,6 +168,9 @@
                         </td>
                         <td class="capacity">
                             @Model.GetRemainingCapacity(route)
+                        </td>
+                        <td class="capacity">
+                            @route.GetTotalCost()
                         </td>
                         <td class="action">
                             <a class="link-btn-choose" onclick="document.getElementById('popup-ticket-@route.Id').style.display = 'inherit'">Обрати</a>
@@ -371,7 +377,7 @@
                         <a class="popup-footer-link-button-ticket-order" onclick="document.getElementById('popup-ticket-@route.Id').style.display = 'none'">Закрити</a>
                         @if (HttpContext.Session.GetString("UserId") != null)
                         {
-                            <input class="popup-footer-button-ticket-order" type="submit" form="ticket-form-@route.Id" value="Купити">
+                            <input class="popup-footer-button-ticket-order" type="submit" form="ticket-form-@route.Id" value="Купити (@route.GetTotalCost())">
                         }
                         else
                         {

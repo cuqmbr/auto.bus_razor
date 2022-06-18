@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-
 namespace TicketOffice.Services;
 
 public class UserValidationService

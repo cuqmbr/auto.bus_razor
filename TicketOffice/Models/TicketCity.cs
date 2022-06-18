@@ -22,6 +22,10 @@ public class TicketCity
     [DataType(DataType.Date)]
     public DateTime? DepartureTime { get; set; }
     
+    [Display(Name = "Ціна подорожі з попереднього міста")]
+    [DataType(DataType.Currency)]
+    public double? CostFromPreviousCity { get; set; }
+    
     [ForeignKey("Ticket")]
     public int TicketId { get; set; }
     public Ticket Ticket { get; set; } = null!;

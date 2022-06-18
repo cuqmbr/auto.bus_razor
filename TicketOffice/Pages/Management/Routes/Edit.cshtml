@@ -36,13 +36,18 @@
                 </div>
             
                 <div class="city-date">
-                    <input class="field-city" type="text" placeholder="Дата й час прибуття" autocomplete="off" asp-for="TimeStrings[i].ArrivalDate">
+                    <input class="field-city" type="text" placeholder="Дата прибуття" autocomplete="off" asp-for="TimeStrings[i].ArrivalDate">
                     <div class="validation-error"><span></span>@Model.ArrivalTimeValidationError[i]</div>
                 </div>
             
                 <div class="city-date">
-                    <input class="field-city" type="text" placeholder="Дата й час відправлення" autocomplete="off" asp-for="TimeStrings[i].DepartureDate">
+                    <input class="field-city" type="text" placeholder="Дата відправлення" autocomplete="off" asp-for="TimeStrings[i].DepartureDate">
                     <div class="validation-error"><span>@Model.DepartureTimeValidationError[i]</span></div>
+                </div>
+                
+                <div class="city-cost">
+                    <input class="field-city" type="number" placeholder="Ціна" autocomplete="off" min="0" asp-for="Route.Cities[i].CostFromPreviousCity">
+                    @* <div class="validation-error"><span>@Model.DepartureTimeValidationError[i]</span></div> *@
                 </div>
                 
                 <input type="number" hidden value="@Model.Route.Cities[i].Id" asp-for="CityIds[i]">

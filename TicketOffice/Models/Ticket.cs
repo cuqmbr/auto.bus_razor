@@ -19,6 +19,11 @@ public class Ticket
     [Required(ErrorMessage = "Поле має бути заповненим")]
     [Display(Name = "Номер місця пасажира")]
     public int PassengerPlace { get; set; }
+    
+    [Required]
+    [Display(Name = "Дата придбання квитка")]
+    public DateTime OderDate { get; set; }
+    
 
     [Required]
     public ICollection<TicketCity> Cities { get; set; } = null!;
@@ -30,4 +35,16 @@ public class Ticket
     [ForeignKey("Route")]
     public int RouteId { get; set; }
     public Route Route { get; set; } = null!;
+
+    public double GetTotalCost()
+    {
+        double cost = 0;
+
+        for (int i = 1; i < Cities.Count; i++)
+        {
+            cost += Cities.ToList()[i].CostFromPreviousCity ?? 0;
+        }
+
+        return cost;
+    }
 }
