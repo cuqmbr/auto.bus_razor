@@ -2,13 +2,18 @@
 
 - C#, Microsoft.EntityFrameworkCore, Razor Pages
 
-### Installation:
+### Installation
 
 1. Compile the project (`[~]$ dotnet build -c Release` or in IDE)
 2. Copy ~/TicketOffice/wwwroot to the root directory of compiled project (clean database can be found in ~/wwwroot/db)
 3. Launch
 
-### Available routes:
+### Database update
+
+1. `[~/TicketOffice]$ dotnet-ef database drop` then confirm database deletion
+2. `[~/TicketOffice]$ dotnet-ef database update`
+
+### Available routes
 
 #### № 027
 
