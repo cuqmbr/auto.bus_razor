@@ -8,8 +8,8 @@ To build and then run compiled project use `[~]$ sh run.sh`
 
 ### Security
 
-The program is build for educational purposes and will not be use in the production.
-But if you want to host this web app be shure to comment/delete 30'th line in Program.cs/
+The program is built for educational purposes and will not be use in the production.
+But if you want to host this web app be shure to comment/delete 30'th line in Program.cs
 
 ### Miscellaneous
 
