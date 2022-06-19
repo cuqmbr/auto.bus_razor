@@ -4,35 +4,35 @@
 
 ### Installation
 
-1. Compile the project (`[~]$ dotnet build -c Release` or in IDE)
-2. Copy ~/TicketOffice/wwwroot to the root directory of compiled project (clean database can be found in ~/wwwroot/db)
-3. Launch
+To build and then run compiled project use `[~]$ sh run.sh`
 
-### Database update
+### Security
 
-1. `[~/TicketOffice]$ dotnet-ef database drop` then confirm database deletion
-2. `[~/TicketOffice]$ dotnet-ef database update`
+The program is build for educational purposes and will not be use in the production.
+But if you want to host this web app be shure to comment/delete 30'th line in Program.cs/
 
-### Available routes
+### Miscellaneous
 
-#### № 027
+#### Available routes
+
+##### № 027
 
 - Сватове -> Красноріченське -> Кремінна -> Рубіжне -> Сєвєродонецьк -> Лисичанськ -> Сєвєродонецьк -> Рубіжне -> Кремінна -> Красноріченське -> Сватове 
 - (Date: date of the first launch of project with clean database)
 
-#### № 013
+##### № 013
 
 - Кремінна -> Рубіжне -> Сєвєродонецьк -> Станиця Луганська -> Сєвєродонецьк -> Рубіжне -> Кремінна 
 - (Date: date of the first launch of project with clean database)
 
-### Test accounts
+#### Test accounts
 
-#### User
+##### User
 
 - e-mail: user
 - password: user
 
-#### Admin
+##### Admin
 
 - e-mail: admin
 - password: admin
