@@ -30,5 +30,5 @@ public class User
     public bool IsManager { get; set; }
     
 
-    public ICollection<Ticket>? Tickets { get; set; }
+    public List<Ticket>? Tickets { get; set; }
 }

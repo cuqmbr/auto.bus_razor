@@ -26,7 +26,7 @@ public class Ticket
     
 
     [Required]
-    public ICollection<TicketCity> Cities { get; set; } = null!;
+    public List<TicketCity> Cities { get; set; } = null!;
 
     [ForeignKey("User")]
     public int UserId { get; set; }
