@@ -1,6 +1,6 @@
 # auto.bus – Ticket Office web application  
 
-You can do the following:
+## Features
 
 - Search for routes by departure/arrival city and date
 - Filter routes by number, duration and date
@@ -21,7 +21,8 @@ You can do the following:
 
 1. [Download](https://dotnet.microsoft.com/download) and install .NET with ASP.NET Core
 2. Clone this project
-3. Run run.sh file in terminal `[~]$ sh run.sh`
+3. Install Entity Framework Core .NET Command-line Tools `[~]$ dotnet tool install --global dotnet-ef`
+4. Run run.sh file in terminal `[~]$ sh run.sh`
 
 NOTE: use `[~]$ sh run.sh --help` to see available options
 
