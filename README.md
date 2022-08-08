@@ -46,3 +46,7 @@ If you found an issue or would like to submit an improvement to this project, pl
 ## Known issues (Work in progress)
 
 - The route management page will not load if database contains a route with an empty departure/arrival city date
+
+## Development status
+
+Released – Project is complete, but might receive some updates
