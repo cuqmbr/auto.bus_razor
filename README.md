@@ -8,13 +8,13 @@
 - Buy tickets
 - Manage routes (create, read, update and delete) on admin account
 
+<!--
 ## Project preview
 
 <div style="display: flex;">
   <img src="http://drive.google.com/uc?export=view&id=1ltCPim1sfg9Rq_4MPqs97QOc_nU_Cfqj" alt="Search route page" width="480" height="233"  border="10" />
-<!--   <img src="http://drive.google.com/uc?export=view&id=1wJKDHYI9KuWQjcS70o13UmDqliayA31X" alt="My tickets page" width="480" height="233"  border="10" /> -->
 </div>                                                                                                                                          
-                                                                                                                                                    
+-->                                                                                                                                                
 ## How to install?
 
 ### Linux
